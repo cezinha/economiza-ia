@@ -252,6 +252,9 @@ def gerar_transacoes(usuarios_df, num_meses=NUM_MESES):
 def adicionar_anomalias(transacoes_df, taxa_anomalia=0.05):
     """Adiciona transações anômalas (gastos atípicos)"""
     
+    # Inicializar coluna is_anomalia como False para todas as transações
+    transacoes_df['is_anomalia'] = False
+    
     n_anomalias = int(len(transacoes_df) * taxa_anomalia)
     indices_anomalias = np.random.choice(transacoes_df.index, n_anomalias, replace=False)
     
@@ -260,9 +263,6 @@ def adicionar_anomalias(transacoes_df, taxa_anomalia=0.05):
         fator_anomalia = np.random.uniform(3, 8)
         transacoes_df.loc[idx, 'valor'] = transacoes_df.loc[idx, 'valor'] * fator_anomalia
         transacoes_df.loc[idx, 'is_anomalia'] = True
-    
-    # Marcar transações normais
-    transacoes_df['is_anomalia'] = transacoes_df['is_anomalia'].fillna(False)
     
     return transacoes_df
 
