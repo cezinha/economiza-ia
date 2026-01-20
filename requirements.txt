@@ -1,0 +1,81 @@
+# ============================================
+# REQUIREMENTS.TXT - ECONOMIZA+ MVP
+# ============================================
+# Projeto: Sistema de Recomendação Financeira
+# Python: 3.8+
+# Última atualização: Janeiro 2025
+# ============================================
+
+# ============================================
+# MANIPULAÇÃO DE DADOS
+# ============================================
+pandas==2.0.3
+numpy==1.24.3
+
+# ============================================
+# MACHINE LEARNING
+# ============================================
+scikit-learn==1.3.0
+
+# ============================================
+# VISUALIZAÇÃO
+# ============================================
+matplotlib==3.7.2
+seaborn==0.12.2
+
+# ============================================
+# JUPYTER NOTEBOOKS
+# ============================================
+jupyter==1.0.0
+ipykernel==6.25.0
+ipywidgets==8.1.0
+
+# ============================================
+# OPCIONAL: ANÁLISE ESTATÍSTICA ADICIONAL
+# ============================================
+scipy==1.11.1
+
+# ============================================
+# OPCIONAL: PROGRESS BARS
+# ============================================
+tqdm==4.66.1
+
+# ============================================
+# NOTAS DE USO
+# ============================================
+# Instalação:
+# pip install -r requirements.txt
+#
+# Ou com --break-system-packages (necessário em alguns ambientes):
+# pip install -r requirements.txt --break-system-packages
+#
+# Para Google Colab:
+# !pip install -r requirements.txt
+#
+# ============================================
+# VERSÕES TESTADAS
+# ============================================
+# Este projeto foi testado com:
+# - Python 3.10.12 (Google Colab)
+# - Python 3.8+ (local)
+#
+# ============================================
+# BIBLIOTECAS JÁ INCLUÍDAS NO GOOGLE COLAB
+# ============================================
+# O Google Colab já possui a maioria dessas
+# bibliotecas pré-instaladas. Este arquivo
+# garante versões específicas e compatibilidade.
+#
+# ============================================
+# FUNCIONALIDADES POR BIBLIOTECA
+# ============================================
+#
+# pandas: Manipulação de DataFrames (CSVs)
+# numpy: Operações numéricas e arrays
+# scikit-learn: K-means, Isolation Forest, StandardScaler, métricas
+# matplotlib: Gráficos básicos (Elbow curve, boxplots)
+# seaborn: Visualizações estatísticas avançadas
+# jupyter: Ambiente de notebooks
+# scipy: Cálculos estatísticos (z-score, etc)
+# tqdm: Barras de progresso (opcional)
+#
