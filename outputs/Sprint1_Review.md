@@ -23,13 +23,13 @@
 
 - **Silhouette Score (0.26)**: Abaixo do target (0.5), indicando sobreposicao entre clusters
 - **Davies-Bouldin (1.20)**: Acima do target (1.0), confirmando clusters nao bem separados
-- **Interpretabilidade**: Apesar das metricas, os 4 clusters sao claramente interpretaveis (Poupadores, Equilibrados, Em Alerta, Endividados)
+- **Interpretabilidade**: Apesar das metricas, os 4 clusters sao claramente interpretaveis com perfis distintos de risco financeiro
 
 ### Decisao
 
 Para o MVP, **aceitamos os resultados** pois:
 1. Os clusters tem significado de negocio claro
-2. Permitem recomendacoes personalizadas por perfil
+2. Permitem recomendacoes personalizadas por perfil e nivel de risco
 3. Melhorias podem ser feitas no Sprint 2 (ajuste de features, remocao de outliers)
 
 ## Entregas Concluidas
@@ -43,9 +43,9 @@ Para o MVP, **aceitamos os resultados** pois:
 
 ## Perfis Identificados
 
-- **Endividados**: 59 usuarios (-88.6% poupanca)
+- **Endividados Severos**: 59 usuarios (-88.6% poupanca)
+- **Endividados Moderados**: 167 usuarios (-57.7% poupanca)
 - **Em Alerta**: 196 usuarios (-14.8% poupanca)
-- **Endividados**: 167 usuarios (-57.7% poupanca)
 - **Poupadores**: 78 usuarios (+25.4% poupanca)
 
 ## Top 3 Categorias para Economia
@@ -70,6 +70,7 @@ Para o MVP, **aceitamos os resultados** pois:
 - Testar remocao de outliers antes do clustering
 - Considerar adicionar features comportamentais
 - Avaliar normalizacao alternativa (MinMaxScaler)
+- Refinar limites entre categorias de risco
 
 ---
 *Sprint 1 concluido em Janeiro/2026*

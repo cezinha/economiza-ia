@@ -263,24 +263,36 @@ Apesar das métricas abaixo do ideal, **aceitamos os resultados** para o MVP por
    - Impacto: Médio
 
 **Gastos Médios por Cluster (por categoria):**
-- Clusters 0 e 2 (Endividados): Gastos altos em todas as categorias
+- Cluster 0 (Endividados Severos): Gastos muito altos em todas as categorias
+- Cluster 2 (Endividados Moderados): Gastos altos em categorias não essenciais
 - Cluster 1 (Em Alerta): Gastos moderados, mas sem margem
 - Cluster 3 (Poupadores): Gastos controlados em não essenciais
 
 **Recomendações por Perfil:**
 
-**Endividados (0 e 2):**
-- Prioridade 1: Cortar alimentação fora de casa (economia de R$ 200-300/mês)
-- Prioridade 2: Reduzir vestuário drasticamente (economia de R$ 100-150/mês)
-- Prioridade 3: Eliminar/reduzir lazer pago (economia de R$ 80-120/mês)
+**Endividados Severos (Cluster 0):**
+- Prioridade MÁXIMA: Intervenção urgente + educação financeira
+- Ação 1: Cortar alimentação fora de casa drasticamente (economia de R$ 300-400/mês)
+- Ação 2: Eliminar vestuário não essencial (economia de R$ 150-200/mês)
+- Ação 3: Suspender lazer pago (economia de R$ 100-150/mês)
+- Meta: Reduzir gastos em 40-50%
 
-**Em Alerta (1):**
+**Endividados Moderados (Cluster 2):**
+- Prioridade ALTA: Plano de corte de gastos + acompanhamento
+- Ação 1: Reduzir alimentação fora de casa (economia de R$ 200-250/mês)
+- Ação 2: Reduzir vestuário significativamente (economia de R$ 100-120/mês)
+- Ação 3: Reduzir lazer pago (economia de R$ 70-100/mês)
+- Meta: Reduzir gastos em 25-35%
+
+**Em Alerta (Cluster 1):**
+- Prioridade MODERADA: Orientação preventiva + dicas práticas
 - Foco: Reduzir 20-30% em cada categoria não essencial
-- Meta: Transformar déficit em pequeno superávit
+- Meta: Transformar déficit em pequeno superávit (+5%)
 
-**Poupadores (3):**
-- Foco: Otimizar investimentos, não cortar gastos
-- Oportunidade: Produtos financeiros mais rentáveis
+**Poupadores (Cluster 3):**
+- Prioridade BAIXA: Otimização de investimentos
+- Foco: Produtos financeiros mais rentáveis, não cortar gastos
+- Oportunidade: Aumentar rentabilidade dos investimentos
 
 **Artefatos Gerados:**
 - `outputs/Sprint1_Review.md`
@@ -447,17 +459,27 @@ Apesar das métricas abaixo do ideal, **aceitamos os resultados** para o MVP por
 
 ## Perfis de Usuários - Resumo Executivo
 
-### 🔴 Grupo Crítico (45.2% da base)
-**Clusters 0 e 2 - Endividados**
-- 226 usuários em situação crítica
-- Taxa de poupança: -57% a -89%
-- **Ação:** Intervenção urgente + educação financeira
-- **Meta:** Reduzir gastos em 30-50%
+### 🔴 Grupo Crítico Severo (11.8% da base)
+**Cluster 0 - Endividados Severos**
+- 59 usuários em situação crítica extrema
+- Taxa de poupança: -89%
+- **Risco:** CRÍTICO - Endividamento grave (gastos quase 2× a renda)
+- **Ação:** Intervenção URGENTE + educação financeira intensiva
+- **Meta:** Reduzir gastos em 40-50%
+
+### 🟠 Grupo Crítico Moderado (33.4% da base)
+**Cluster 2 - Endividados Moderados**
+- 167 usuários em situação crítica
+- Taxa de poupança: -58%
+- **Risco:** ALTO - Endividamento significativo (gastos 55% acima da renda)
+- **Ação:** Plano de corte de gastos + acompanhamento regular
+- **Meta:** Reduzir gastos em 25-35%
 
 ### 🟡 Grupo de Risco (39.2% da base)
 **Cluster 1 - Em Alerta**
 - 196 usuários com déficit leve
 - Taxa de poupança: -15%
+- **Risco:** MODERADO - Tendência ao endividamento
 - **Ação:** Orientação preventiva + dicas práticas
 - **Meta:** Transformar em pequeno superávit (+5%)
 
@@ -465,7 +487,8 @@ Apesar das métricas abaixo do ideal, **aceitamos os resultados** para o MVP por
 **Cluster 3 - Poupadores**
 - 78 usuários com situação financeira estável
 - Taxa de poupança: +25%
-- **Ação:** Produtos de investimento + otimização
+- **Risco:** BAIXO - Situação financeira saudável
+- **Ação:** Produtos de investimento + otimização fiscal
 - **Meta:** Aumentar rentabilidade dos investimentos
 
 ---
@@ -474,12 +497,12 @@ Apesar das métricas abaixo do ideal, **aceitamos os resultados** para o MVP por
 
 ### Potencial de Economia Mensal (por usuário médio)
 
-| Perfil | Economia Potencial | Principais Categorias |
-|--------|-------------------|----------------------|
-| Endividados Severos | R$ 400-600/mês | Alimentação Fora, Vestuário, Lazer |
-| Endividados Moderados | R$ 300-450/mês | Alimentação Fora, Transporte |
-| Em Alerta | R$ 150-250/mês | Alimentação Fora, Lazer |
-| Poupadores | R$ 50-100/mês | Otimizações pontuais |
+| Perfil | Cluster | Economia Potencial | Principais Categorias |
+|--------|---------|-------------------|----------------------|
+| Endividados Severos | 0 (11.8%) | R$ 400-600/mês | Alimentação Fora, Vestuário, Lazer |
+| Endividados Moderados | 2 (33.4%) | R$ 300-450/mês | Alimentação Fora, Transporte, Vestuário |
+| Em Alerta | 1 (39.2%) | R$ 150-250/mês | Alimentação Fora, Lazer |
+| Poupadores | 3 (15.6%) | R$ 50-100/mês | Otimizações pontuais |
 
 ### Impacto Total Estimado
 - **Usuários em risco (386):** Economia média de R$ 250-350/mês
@@ -546,11 +569,12 @@ O MVP está pronto para avançar para o Sprint 2 com foco em:
 - **Aprendizado:** Métricas estatísticas nem sempre refletem utilidade prática
 - **Ação Futura:** Testar remoção de outliers antes do clustering
 
-#### 2. **Dois Clusters Identificados como "Endividados"**
-- **Problema:** Clusters 0 e 2 têm nomes similares mas comportamentos diferentes
-- **Causa:** Diferença de severidade (-89% vs -58%) não foi capturada no nome
-- **Aprendizado:** Nomenclatura precisa ser mais específica
-- **Ação Futura:** Renomear para "Endividados Severos" e "Endividados Moderados"
+#### 2. **Nomenclatura dos Clusters Refinada** ✅ RESOLVIDO
+- **Problema Inicial:** Clusters 0 e 2 tinham nomes similares ("Endividados") mas comportamentos diferentes
+- **Causa:** Diferença de severidade (-89% vs -58%) não estava clara na nomenclatura
+- **Solução Implementada:** Renomeados para "Endividados Severos" (Cluster 0) e "Endividados Moderados" (Cluster 2)
+- **Aprendizado:** Nomenclatura específica evita confusão e comunica melhor o nível de risco
+- **Resultado:** Perfis agora têm identidade única e clara diferenciação
 
 #### 3. **Correlação Alta entre Features**
 - **Problema:** `media_renda` e `media_gasto` são altamente correlacionadas
