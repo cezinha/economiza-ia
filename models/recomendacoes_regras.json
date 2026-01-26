@@ -1,0 +1,104 @@
+{
+  "versao": "1.0",
+  "data_criacao": "2026-01-26",
+  "descricao": "Regras de recomendacao de economia por cluster",
+  "total_regras": 8,
+  "clusters": {
+    "0": {
+      "nome": "Endividados Severos",
+      "prioridade": "CRITICA",
+      "regras": [
+        {
+          "id": "R0_1",
+          "categoria": "Alimentacao_Fora",
+          "acao": "reducao",
+          "percentual": 0.7,
+          "titulo": "Cortar refeicoes fora de casa",
+          "mensagem": "Reduza drasticamente refeicoes fora de casa. Priorize marmitas e cozinhar em casa.",
+          "dica": "Planeje cardapio semanal e faca compras com lista"
+        },
+        {
+          "id": "R0_2",
+          "categoria": "Vestuario",
+          "acao": "eliminacao",
+          "percentual": 0.9,
+          "titulo": "Suspender compras de vestuario",
+          "mensagem": "Suspenda compras de roupas nao essenciais por 3 meses.",
+          "dica": "Revise o guarda-roupa e conserte pecas antes de comprar novas"
+        }
+      ]
+    },
+    "1": {
+      "nome": "Em Alerta",
+      "prioridade": "MODERADA",
+      "regras": [
+        {
+          "id": "R1_1",
+          "categoria": "Alimentacao_Fora",
+          "acao": "reducao",
+          "percentual": 0.4,
+          "titulo": "Reduzir refeicoes fora de casa",
+          "mensagem": "Limite refeicoes fora a 1-2x por semana.",
+          "dica": "Leve marmita para o trabalho pelo menos 3x por semana"
+        },
+        {
+          "id": "R1_2",
+          "categoria": "Lazer",
+          "acao": "limite",
+          "percentual": 0.35,
+          "titulo": "Estabelecer teto para lazer",
+          "mensagem": "Defina um limite mensal para gastos com lazer.",
+          "dica": "Busque alternativas gratuitas: parques, eventos culturais, bibliotecas"
+        }
+      ]
+    },
+    "2": {
+      "nome": "Endividados Moderados",
+      "prioridade": "ALTA",
+      "regras": [
+        {
+          "id": "R2_1",
+          "categoria": "Alimentacao_Fora",
+          "acao": "reducao",
+          "percentual": 0.5,
+          "titulo": "Reduzir significativamente refeicoes fora",
+          "mensagem": "Reduza refeicoes fora de casa pela metade.",
+          "dica": "Cozinhe em maior quantidade no fim de semana para a semana toda"
+        },
+        {
+          "id": "R2_2",
+          "categoria": "Vestuario",
+          "acao": "reducao",
+          "percentual": 0.5,
+          "titulo": "Cortar gastos com vestuario",
+          "mensagem": "Reduza compras de roupas pela metade.",
+          "dica": "Compre apenas itens essenciais e aproveite promocoes"
+        }
+      ]
+    },
+    "3": {
+      "nome": "Poupadores",
+      "prioridade": "BAIXA",
+      "regras": [
+        {
+          "id": "R3_1",
+          "categoria": "Transporte",
+          "acao": "otimizacao",
+          "percentual": 0.15,
+          "titulo": "Otimizar gastos com transporte",
+          "mensagem": "Avalie alternativas de transporte mais economicas.",
+          "dica": "Considere caronas, transporte publico ou bicicleta para trajetos curtos"
+        },
+        {
+          "id": "R3_2",
+          "categoria": "Telecomunicacoes",
+          "acao": "revisao",
+          "percentual": 0.2,
+          "titulo": "Revisar planos e assinaturas",
+          "mensagem": "Revise planos de celular, internet e streaming.",
+          "dica": "Cancele assinaturas nao utilizadas e negocie valores com operadoras"
+        }
+      ]
+    }
+  }
+}
