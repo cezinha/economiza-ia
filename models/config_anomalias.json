@@ -1,0 +1,31 @@
+{
+  "versao": "1.1",
+  "data_validacao": "2026-01-27",
+  "modelo": "IsolationForest",
+  "parametros": {
+    "contamination": 0.05,
+    "n_estimators": 100,
+    "random_state": 42
+  },
+  "features": [
+    "feat_valor_norm",
+    "feat_ratio_mediana"
+  ],
+  "metricas_validacao": {
+    "precision": 0.4732,
+    "recall": 0.4736,
+    "f1_score": 0.4734,
+    "specificity": 0.9723
+  },
+  "targets": {
+    "precision": 0.85,
+    "recall": 0.8
+  },
+  "h6_validada": false,
+  "arquivos": {
+    "modelo": "isolation_forest.pkl",
+    "scaler": "scaler_anomalias.pkl",
+    "stats_categoria": "stats_categoria_anomalias.csv",
+    "metricas": "outputs/metricas_anomalias.csv"
+  }
+}

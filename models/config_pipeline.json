@@ -1,0 +1,40 @@
+{
+  "versao": "1.0",
+  "data_criacao": "2026-01-27",
+  "descricao": "Pipeline integrado Economiza+ MVP",
+  "componentes": {
+    "clustering": {
+      "modelo": "K-means",
+      "arquivo": "kmeans_best.pkl",
+      "scaler": "scaler.pkl",
+      "features": [
+        "media_renda",
+        "media_gasto",
+        "taxa_poupanca",
+        "pct_gastos_essenciais",
+        "std_gasto"
+      ],
+      "clusters": 4
+    },
+    "recomendacoes": {
+      "tipo": "Regras por cluster",
+      "arquivo": "recomendacoes_regras.json",
+      "total_regras": 8
+    },
+    "anomalias": {
+      "modelo": "IsolationForest",
+      "arquivo": "isolation_forest.pkl",
+      "scaler": "scaler_anomalias.pkl",
+      "features": [
+        "feat_valor_norm",
+        "feat_ratio_mediana"
+      ]
+    }
+  },
+  "arquivos": {
+    "pipeline_completo": "pipeline_completo.pkl",
+    "resultados_teste": "outputs/pipeline_teste_resultados.csv",
+    "visualizacao": "outputs/pipeline_resultados_teste.png"
+  },
+  "funcao_principal": "analisar_usuario(user_id) -> Dict"
+}

@@ -1,0 +1,10 @@
+metrica,valor,target,status
+precision,0.47316664923109114,0.85,NAO_ATINGIDO
+recall,0.47361256544502617,0.8,NAO_ATINGIDO
+f1_score,0.4733895023287456,,
+specificity,0.972281086079447,,
+npv,0.9723292527191862,,
+true_positives,4523.0,,
+true_negatives,176645.0,,
+false_positives,5036.0,,
+false_negatives,5027.0,,

@@ -1,30 +1,30 @@
 {
   "versao": "1.0",
   "data_criacao": "2026-01-26",
-  "descricao": "Regras de recomendacao de economia por cluster",
+  "descricao": "Regras de recomendação de economia por cluster",
   "total_regras": 8,
   "clusters": {
     "0": {
       "nome": "Endividados Severos",
-      "prioridade": "CRITICA",
+      "prioridade": "CRÍTICA",
       "regras": [
         {
           "id": "R0_1",
           "categoria": "Alimentacao_Fora",
           "acao": "reducao",
           "percentual": 0.7,
-          "titulo": "Cortar refeicoes fora de casa",
-          "mensagem": "Reduza drasticamente refeicoes fora de casa. Priorize marmitas e cozinhar em casa.",
-          "dica": "Planeje cardapio semanal e faca compras com lista"
+          "titulo": "Cortar refeições fora de casa",
+          "mensagem": "Reduza drasticamente refeições fora de casa. Priorize marmitas e cozinhar em casa.",
+          "dica": "Planeje cardápio semanal e faça compras com lista"
         },
         {
           "id": "R0_2",
           "categoria": "Vestuario",
           "acao": "eliminacao",
           "percentual": 0.9,
-          "titulo": "Suspender compras de vestuario",
-          "mensagem": "Suspenda compras de roupas nao essenciais por 3 meses.",
-          "dica": "Revise o guarda-roupa e conserte pecas antes de comprar novas"
+          "titulo": "Suspender compras de vestuário",
+          "mensagem": "Suspenda compras de roupas não essenciais por 3 meses.",
+          "dica": "Revise o guarda-roupa e conserte peças antes de comprar novas"
         }
       ]
     },
@@ -37,8 +37,8 @@
           "categoria": "Alimentacao_Fora",
           "acao": "reducao",
           "percentual": 0.4,
-          "titulo": "Reduzir refeicoes fora de casa",
-          "mensagem": "Limite refeicoes fora a 1-2x por semana.",
+          "titulo": "Reduzir refeições fora de casa",
+          "mensagem": "Limite refeições fora a 1-2x por semana.",
           "dica": "Leve marmita para o trabalho pelo menos 3x por semana"
         },
         {
@@ -61,8 +61,8 @@
           "categoria": "Alimentacao_Fora",
           "acao": "reducao",
           "percentual": 0.5,
-          "titulo": "Reduzir significativamente refeicoes fora",
-          "mensagem": "Reduza refeicoes fora de casa pela metade.",
+          "titulo": "Reduzir significativamente refeições fora",
+          "mensagem": "Reduza refeições fora de casa pela metade.",
           "dica": "Cozinhe em maior quantidade no fim de semana para a semana toda"
         },
         {
@@ -70,9 +70,9 @@
           "categoria": "Vestuario",
           "acao": "reducao",
           "percentual": 0.5,
-          "titulo": "Cortar gastos com vestuario",
+          "titulo": "Cortar gastos com vestuário",
           "mensagem": "Reduza compras de roupas pela metade.",
-          "dica": "Compre apenas itens essenciais e aproveite promocoes"
+          "dica": "Compre apenas itens essenciais e aproveite promoções"
         }
       ]
     },
@@ -86,8 +86,8 @@
           "acao": "otimizacao",
           "percentual": 0.15,
           "titulo": "Otimizar gastos com transporte",
-          "mensagem": "Avalie alternativas de transporte mais economicas.",
-          "dica": "Considere caronas, transporte publico ou bicicleta para trajetos curtos"
+          "mensagem": "Avalie alternativas de transporte mais econômicas.",
+          "dica": "Considere caronas, transporte público ou bicicleta para trajetos curtos"
         },
         {
           "id": "R3_2",
@@ -96,7 +96,7 @@
           "percentual": 0.2,
           "titulo": "Revisar planos e assinaturas",
           "mensagem": "Revise planos de celular, internet e streaming.",
-          "dica": "Cancele assinaturas nao utilizadas e negocie valores com operadoras"
+          "dica": "Cancele assinaturas não utilizadas e negocie valores com operadoras"
         }
       ]
     }

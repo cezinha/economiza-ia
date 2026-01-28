@@ -1,9 +1,9 @@
 # Sprint 2 Review - Economiza+ MVP
 ## Sistema de Recomendacoes e Deteccao de Anomalias
 
-**Periodo:** 26 de Janeiro de 2026  
-**Duracao:** 7 dias  
-**Status:** Concluido
+**Periodo:** 26-27 de Janeiro de 2026
+**Duracao:** 7 dias (Dias 8-14)
+**Status:** CONCLUIDO
 
 ---
 
@@ -11,8 +11,8 @@
 
 | Metrica | Resultado |
 |---------|-----------|
-| Notebooks desenvolvidos | 3 (07, 08, 09) |
-| Modelos treinados | 1 (Isolation Forest) |
+| Notebooks desenvolvidos | 6 (07-12) |
+| Modelos treinados | 2 (Isolation Forest + Pipeline) |
 | Regras de recomendacao | 8 (2 por cluster) |
 | Usuarios analisados | 500 |
 | Economia mensal total projetada | R$ 135.972,17 |
@@ -24,94 +24,160 @@
 
 ### H1: Recomendacoes Geram Economia Real
 
-**Target:** 15-20% de reducao de gastos  
-**Resultado:** 8.11% de economia media (% da renda)  
-**Status:** ❌ **NAO ATINGIDA**
+**Target:** 15-20% de reducao de gastos
+**Resultado:** 8.11% de economia media (% da renda)
+**Status:** :x: **NAO VALIDADA** (parcialmente - Cluster 0 atingiu 19.22%)
 
 #### Detalhamento por Cluster
 
-| Cluster | Economia Media | % da Renda | Status Individual |
-|---------|----------------|------------|-------------------|
-| **Endividados Severos** | R$ 698,53 | 19.22% | ✅ Atingido |
-| **Em Alerta** | R$ 162,59 | 5.37% | ❌ Abaixo |
-| **Endividados Moderados** | R$ 320,13 | 10.38% | ❌ Abaixo |
-| **Poupadores** | R$ 120,90 | 1.72% | ❌ Abaixo |
+| Cluster | Economia Media | % da Renda | Status |
+|---------|----------------|------------|--------|
+| **Endividados Severos** | R$ 698,53 | 19.22% | :white_check_mark: Atingido |
+| **Em Alerta** | R$ 162,59 | 5.37% | :x: Abaixo |
+| **Endividados Moderados** | R$ 320,13 | 10.38% | :x: Abaixo |
+| **Poupadores** | R$ 120,90 | 1.72% | :x: Abaixo |
 
 #### Analise
 
 - **Cluster 0 (Endividados Severos)** atingiu o target com 19.22% de economia
 - Clusters 1, 2 e 3 ficaram abaixo do target minimo de 15%
-- Economia media geral de 8.11% insuficiente para validar H1
-- Impacto financeiro total ainda significativo: R$ 135k/mes
-
-#### Recomendacoes Implementadas
-
-**Cluster 0 - Endividados Severos (59 usuarios):**
-1. Cortar Alimentacao_Fora em 70% → Economia: R$ 288/mes
-2. Eliminar Vestuario nao essencial → Economia: R$ 150/mes
-
-**Cluster 1 - Em Alerta (196 usuarios):**
-1. Reduzir Alimentacao_Fora em 40% → Economia: R$ 165/mes
-2. Limitar Lazer a R$ 100/mes → Economia: R$ 55/mes
-
-**Cluster 2 - Endividados Moderados (167 usuarios):**
-1. Reduzir Alimentacao_Fora em 50% → Economia: R$ 206/mes
-2. Cortar Vestuario em 50% → Economia: R$ 99/mes
-
-**Cluster 3 - Poupadores (78 usuarios):**
-1. Otimizar gastos com Transporte → Economia: R$ 50/mes
-2. Revisar assinaturas em Telecomunicacoes → Economia: R$ 30/mes
+- Economia media geral de 8.11% insuficiente para validar H1 globalmente
+- Impacto financeiro total ainda significativo: R$ 135k/mes para 500 usuarios
 
 ---
 
 ### H6: Deteccao de Anomalias com Isolation Forest
 
-**Target:** Precision >0.85 e Recall >0.80  
-**Status:** ⏳ **EM ANDAMENTO** (Notebook 09 parcialmente executado)
+**Target:** Precision >0.85 e Recall >0.80
+**Resultado:** Precision 47.3%, Recall 47.4%
+**Status:** :x: **NAO VALIDADA**
 
-#### Progresso Atual
+#### Metricas Detalhadas
 
-- ✅ Modelo Isolation Forest treinado
-- ✅ Features preparadas (valor + valor_normalizado)
-- ✅ Contamination definida (5%)
-- ⏳ Validacao formal pendente (Notebook 10)
+| Metrica | Valor | Target | Status |
+|---------|-------|--------|--------|
+| Precision | 0.4732 | > 0.85 | :x: Nao atingido |
+| Recall | 0.4736 | > 0.80 | :x: Nao atingido |
+| F1-Score | 0.4734 | - | - |
+| Specificity | 0.9723 | - | - |
 
-#### Resultados Preliminares
+#### Matriz de Confusao
 
-Metricas preliminares observadas durante o treinamento indicam performance proxima aos targets, mas validacao formal sera realizada no Notebook 10_Anomalias_Validacao.ipynb.
+|  | Pred Normal | Pred Anomalia |
+|--|-------------|---------------|
+| **Real Normal** | 176.645 | 5.036 |
+| **Real Anomalia** | 5.027 | 4.523 |
+
+#### Analise
+
+- O modelo detecta anomalias com ~47% de acuracia
+- Alta especificidade (97.2%) - bom em identificar transacoes normais
+- O ground truth sintetico (5% aleatorio) dificulta a deteccao baseada em padroes
+- Recomendacao: revisar geracao de anomalias no dataset para Sprint 3
 
 ---
 
 ## Entregas Concluidas
 
-### Notebooks
-- ✅ [07_Recomendacoes_Sistema.ipynb](../notebooks/07_Recomendacoes_Sistema.ipynb) - Sistema de recomendacoes estruturado
-- ✅ [08_Recomendacoes_Economia.ipynb](../notebooks/08_Recomendacoes_Economia.ipynb) - Calculo de economia projetada
-- ✅ [09_Anomalias_Treino.ipynb](../notebooks/09_Anomalias_Treino.ipynb) - Treinamento Isolation Forest
-- ⏳ 10_Anomalias_Validacao.ipynb - Pendente
-- ⏳ 11_Pipeline_Integrado.ipynb - Pendente
-- ⏳ 12_Demonstracao.ipynb - Pendente
+### Notebooks (6/6)
+
+| Notebook | Descricao | Status |
+|----------|-----------|--------|
+| 07_Recomendacoes_Sistema.ipynb | Sistema de regras por cluster | :white_check_mark: |
+| 08_Recomendacoes_Economia.ipynb | Calculo de economia projetada | :white_check_mark: |
+| 09_Anomalias_Treino.ipynb | Treinamento Isolation Forest | :white_check_mark: |
+| 10_Anomalias_Validacao.ipynb | Validacao H6 | :white_check_mark: |
+| 11_Pipeline_Integrado.ipynb | Pipeline end-to-end | :white_check_mark: |
+| 12_Demonstracao.ipynb | Demonstracao do sistema | :white_check_mark: |
 
 ### Modelos e Artefatos
-- ✅ `models/recomendacoes_regras.json` - 8 regras (2 por cluster)
-- ✅ `models/isolation_forest.pkl` - Detector global treinado
-- ⏳ `models/pipeline_completo.pkl` - Pendente
 
-### Datasets
-- ✅ `data/processed/economia_projetada.csv` - 500 usuarios com economia calculada
-- ⏳ `data/processed/transacoes_com_anomalias_pred.csv` - Pendente
+| Arquivo | Descricao | Status |
+|---------|-----------|--------|
+| `models/recomendacoes_regras.json` | 8 regras (2 por cluster) | :white_check_mark: |
+| `models/isolation_forest.pkl` | Detector de anomalias | :white_check_mark: |
+| `models/scaler_anomalias.pkl` | Scaler para features de anomalias | :white_check_mark: |
+| `models/stats_categoria_anomalias.csv` | Estatisticas por categoria | :white_check_mark: |
+| `models/config_anomalias.json` | Configuracao do modelo | :white_check_mark: |
+| `models/pipeline_completo.pkl` | Pipeline integrado | :white_check_mark: |
+| `models/config_pipeline.json` | Configuracao do pipeline | :white_check_mark: |
+
+### Datasets Gerados
+
+| Arquivo | Linhas | Descricao |
+|---------|--------|-----------|
+| `economia_projetada.csv` | 500 | Economia por usuario |
+| `transacoes_com_anomalias_pred.csv` | 191.231 | Transacoes com predicoes |
+| `pipeline_teste_resultados.csv` | 10 | Resultados de teste |
 
 ### Visualizacoes
-- ✅ `outputs/economia_por_cluster.png`
-- ✅ `outputs/distribuicao_economia_cluster.png`
-- ✅ `outputs/poupanca_atual_vs_projetada.png`
-- ✅ `outputs/economia_por_recomendacao.png`
-- ✅ `outputs/anomalias_distribuicao.png`
+
+- `outputs/economia_por_cluster.png`
+- `outputs/distribuicao_economia_cluster.png`
+- `outputs/poupanca_atual_vs_projetada.png`
+- `outputs/economia_por_recomendacao.png`
+- `outputs/anomalias_distribuicao.png`
+- `outputs/matriz_confusao_anomalias.png`
+- `outputs/validacao_h6_*.png` (3 arquivos)
+- `outputs/pipeline_resultados_teste.png`
+- `outputs/demo_cluster_*.png` (4 arquivos)
+- `outputs/demo_comparativo_perfis.png`
 
 ### Documentacao
-- ✅ `outputs/validacao_h1.md` - Validacao detalhada H1
-- ✅ `outputs/Sprint2_Review.md` - Este documento
-- ✅ `outputs/Sprint2_Resumo.md` - Documentacao tecnica
+
+- `outputs/validacao_h1.md`
+- `outputs/validacao_h6.md`
+- `outputs/metricas_anomalias.csv`
+- `outputs/Sprint2_Review.md` (este documento)
+- `outputs/Sprint2_Resumo.md`
+
+---
+
+## Pipeline Integrado
+
+### Funcao Principal
+
+```python
+resultado = pipeline.analisar_usuario(user_id, transacoes)
+```
+
+### Retorno
+
+```python
+{
+    'user_id': str,
+    'perfil': {
+        'cluster': int,
+        'cluster_nome': str,
+        'prioridade': str,
+        'confianca': float
+    },
+    'financeiro': {
+        'renda_media': float,
+        'gasto_medio': float,
+        'taxa_poupanca': float,
+        'pct_essenciais': float
+    },
+    'recomendacoes': [
+        {'titulo': str, 'economia_potencial': float, 'dica': str},
+        {'titulo': str, 'economia_potencial': float, 'dica': str}
+    ],
+    'economia': {
+        'total_mensal': float,
+        'pct_da_renda': float
+    },
+    'anomalias': {
+        'total_anomalias': int,
+        'transacoes_anomalas': list
+    }
+}
+```
+
+### Performance
+
+- Tempo medio por usuario: ~0.05 segundos
+- Throughput: ~20 usuarios/segundo
+- Reproducibilidade: 100% (3 execucoes identicas)
 
 ---
 
@@ -119,9 +185,11 @@ Metricas preliminares observadas durante o treinamento indicam performance proxi
 
 ### Economia Projetada
 
-**Total Mensal:** R$ 135.972,17  
-**Total Anual:** R$ 1.631.666,04  
-**Media por Usuario:** R$ 271,94/mes
+| Metrica | Valor |
+|---------|-------|
+| Total Mensal | R$ 135.972,17 |
+| Total Anual | R$ 1.631.666,04 |
+| Media por Usuario | R$ 271,94/mes |
 
 ### Melhoria na Taxa de Poupanca
 
@@ -132,84 +200,85 @@ Metricas preliminares observadas durante o treinamento indicam performance proxi
 | Endividados Moderados | -57.7% | -48.3% | +9.4pp |
 | Poupadores | 25.4% | 27.1% | +1.7pp |
 
-Apesar de nao atingir o target H1, as recomendacoes geram impacto positivo mensuravel em todos os clusters, com destaque para os Endividados Severos.
-
 ---
 
 ## Licoes Aprendidas
 
 ### O que funcionou bem
-1. **Estrutura de 2 regras por cluster:** Simplifica implementacao e comunicacao
-2. **Regras baseadas em analise do Sprint 1:** Recomendacoes alinhadas aos perfis
-3. **Isolation Forest global:** Modelo simples e manutentivel
-4. **Pipeline sequencial de notebooks:** Facilita reproducibilidade
+
+1. **Pipeline modular:** Facilita manutencao e testes
+2. **Regras por cluster:** Recomendacoes personalizadas e acionaveis
+3. **Dashboard de demonstracao:** Visualizacao clara do valor entregue
+4. **Documentacao continua:** Facilita handoff para Sprint 3
 
 ### Desafios enfrentados
-1. **H1 nao atingida:** Economia media de 8.11% vs target de 15-20%
-2. **Variabilidade entre clusters:** Apenas Cluster 0 atingiu target individual
-3. **Validacao H6 incompleta:** Faltam notebooks 10-12 para conclusao
 
-### Pontos de atencao
-1. **Recomendacoes mais agressivas podem ser necessarias** para atingir target H1
-2. **Personalizar intensidade das recomendacoes** por cluster (nao apenas tipo)
-3. **Validar aceitabilidade** das recomendacoes com usuarios reais
+1. **H1 parcialmente atingida:** Apenas Cluster 0 atingiu target
+2. **H6 nao atingida:** Anomalias sinteticas aleatorias dificultam deteccao
+3. **Ground truth sintetico:** Nao reflete padroes reais de anomalias
 
----
+### Recomendacoes para Sprint 3
 
-## Proximos Passos (Sprint 3)
-
-### Curto Prazo (Completar Sprint 2)
-1. Executar Notebook 10: Validacao formal H6
-2. Criar Notebook 11: Pipeline integrado end-to-end
-3. Criar Notebook 12: Demonstracao interativa
-4. Atualizar CLAUDE.md com novos artefatos
-
-### Sprint 3 - Dashboard e Refinamento
-1. **Dashboard Interativo:** Visualizar perfil + recomendacoes + anomalias
-2. **Refinamento H1:** Ajustar intensidade das recomendacoes para atingir 15%
-3. **Testes com usuarios:** Validar aceitabilidade das recomendacoes
-4. **API REST:** Expor pipeline como servico
+1. **Ajustar regras de economia:** Aumentar agressividade para clusters 1-3
+2. **Revisar geracao de anomalias:** Criar padroes detectaveis (outliers reais)
+3. **Dashboard interativo:** Permitir exploracao dos dados pelo usuario
+4. **API REST:** Expor pipeline como servico web
 
 ---
 
-## Criterios de Sucesso (Sprint 2)
+## Criterios de Sucesso (Final)
 
 | Criterio | Target | Resultado | Status |
 |----------|--------|-----------|--------|
-| H1 Validada | 15-20% economia | 8.11% | ❌ Nao atingido |
-| H6 Validada | Precision >0.85 | Pendente | ⏳ Em andamento |
-| H6 Validada | Recall >0.80 | Pendente | ⏳ Em andamento |
-| Pipeline Funcional | Sim | Parcial | ⏳ Notebooks 10-12 pendentes |
-| Notebooks Executaveis | 6 novos | 3 completos | ⏳ 50% |
-| Modelos Salvos | 3 novos | 2 completos | ⏳ 67% |
+| H1 Validada | 15-20% economia | 8.11% (19.22% Cluster 0) | :yellow_circle: Parcial |
+| H6 Validada | Precision >0.85 | 47.3% | :x: Nao atingido |
+| H6 Validada | Recall >0.80 | 47.4% | :x: Nao atingido |
+| Pipeline Funcional | Sim | Sim | :white_check_mark: Atingido |
+| Notebooks Executaveis | 6 novos | 6 completos | :white_check_mark: Atingido |
+| Modelos Salvos | 3+ novos | 7 novos | :white_check_mark: Atingido |
+| Demonstracao | 4 perfis | 4 perfis | :white_check_mark: Atingido |
 
 ---
 
-## Riscos e Mitigacoes
+## Handoff para Sprint 3
 
-| Risco | Impacto | Probabilidade | Mitigacao Aplicada |
-|-------|---------|---------------|-------------------|
-| H1 nao atingir 15% | ALTO | ✅ Confirmado | Documentar limitacoes, propor ajustes Sprint 3 |
-| H6 abaixo de targets | MEDIO | Baixa | Modelo treinado, validacao pendente |
-| Tempo insuficiente | MEDIO | ✅ Confirmado | Priorizar validacoes, postergar integracao |
+### Artefatos Prontos
+
+- Pipeline completo funcional (`pipeline_completo.pkl`)
+- Sistema de recomendacoes (8 regras)
+- Detector de anomalias (precisa refinamento)
+- Dashboards de demonstracao
+
+### Tarefas Prioritarias Sprint 3
+
+1. **Dia 15-16:** Dashboard Streamlit
+2. **Dia 17-18:** Refinamento H1 (ajustar regras)
+3. **Dia 19-20:** Documentacao final + apresentacao
+4. **Dia 21:** Review e entrega
+
+### Dependencias
+
+- Streamlit instalado
+- Pipeline pkl carregavel
+- Dados de teste disponiveis
 
 ---
 
 ## Conclusao
 
-A Sprint 2 entregou:
-- ✅ Sistema de recomendacoes funcional (8 regras)
-- ✅ Validacao da hipotese H1 (nao atingida, mas documentada)
-- ✅ Modelo de deteccao de anomalias treinado
-- ⏳ Validacao H6 pendente (notebooks 10-12)
+**Sprint 2 CONCLUIDO com sucesso parcial:**
 
-**Resultado geral:** Parcialmente concluida. Principais artefatos entregues, mas validacao completa de H6 e pipeline integrado pendentes.
+- :white_check_mark: 6 notebooks desenvolvidos e executados
+- :white_check_mark: Pipeline integrado funcional
+- :white_check_mark: Sistema de recomendacoes implementado
+- :yellow_circle: H1 parcialmente validada (Cluster 0 OK)
+- :x: H6 nao validada (necessita revisao do dataset)
 
-**Recomendacao:** Finalizar notebooks 10-12 antes de iniciar Sprint 3 ou incorporar como primeiras tarefas do proximo sprint.
+**Recomendacao:** Prosseguir para Sprint 3 focando no Dashboard e refinamento das hipoteses.
 
 ---
 
-**Documento criado em:** 26 de Janeiro de 2026  
-**Versao:** 1.0  
-**Status:** Aprovado  
-**Proximo Review:** Sprint 3
+**Documento atualizado em:** 27 de Janeiro de 2026
+**Versao:** 2.0 (Final)
+**Status:** Aprovado
+**Proximo:** Sprint 3 - Dashboard e Integracao
