@@ -30,12 +30,12 @@ Segmentar 500 usuarios em perfis financeiros distintos usando K-means clustering
 
 ### Tabela Resumo dos Clusters
 
-| Cluster | Nome | N | % Base | Renda Media | Gasto Medio | Saldo Mensal | Taxa Poupanca |
-|---------|------|---|--------|-------------|-------------|--------------|---------------|
-| 0 | **Endividados Severos** | 59 | 11.8% | R$ 3.693 | R$ 7.298 | -R$ 3.605 | **-88.6%** |
-| 1 | **Em Alerta** | 196 | 39.2% | R$ 3.131 | R$ 3.469 | -R$ 337 | **-14.8%** |
-| 2 | **Endividados Moderados** | 167 | 33.4% | R$ 3.155 | R$ 4.900 | -R$ 1.746 | **-57.7%** |
-| 3 | **Poupadores** | 78 | 15.6% | R$ 7.194 | R$ 5.236 | +R$ 1.958 | **+25.4%** |
+| Cluster | Nome | N | % Base | Taxa Poupanca |
+|---------|------|---|--------|---------------|
+| 0 | **Endividados Moderados** | 86 | 17.2% | **-36.8%** |
+| 1 | **Em Alerta** | 228 | 45.6% | **-24.6%** |
+| 2 | **Endividados Severos** | 112 | 22.4% | **-79.7%** |
+| 3 | **Poupadores** | 74 | 14.8% | **+26.0%** |
 
 ### Distribuicao Visual dos Clusters
 
@@ -45,9 +45,9 @@ Segmentar 500 usuarios em perfis financeiros distintos usando K-means clustering
 
 | Cluster | Caracteristica Principal | Nivel de Risco | Acao Prioritaria |
 |---------|-------------------------|----------------|------------------|
-| 0 - Endividados Severos | Gastos ~2x a renda | CRITICO | Intervencao urgente |
-| 1 - Em Alerta | Gastos levemente > renda | MODERADO | Orientacao preventiva |
-| 2 - Endividados Moderados | Gastos 55% > renda | ALTO | Plano de corte |
+| 0 - Endividados Moderados | Gastos ~37% > renda | ALTO | Plano de corte |
+| 1 - Em Alerta | Gastos ~25% > renda | MODERADO | Orientacao preventiva |
+| 2 - Endividados Severos | Gastos ~2x a renda | CRITICO | Intervencao urgente |
 | 3 - Poupadores | Renda alta + controle | BAIXO | Otimizacao investimentos |
 
 ### Boxplots das Features por Cluster
@@ -59,10 +59,10 @@ Segmentar 500 usuarios em perfis financeiros distintos usando K-means clustering
 ## 4. Distribuicao de Risco na Base
 
 ```
-CRITICO (Cluster 0):     ████████████ 11.8%  (59 usuarios)
-ALTO (Cluster 2):        █████████████████████████████████ 33.4%  (167 usuarios)
-MODERADO (Cluster 1):    ███████████████████████████████████████ 39.2%  (196 usuarios)
-BAIXO (Cluster 3):       ████████████████ 15.6%  (78 usuarios)
+CRITICO (Cluster 2):     ██████████████████████ 22.4%  (112 usuarios)
+ALTO (Cluster 0):        █████████████████ 17.2%  (86 usuarios)
+MODERADO (Cluster 1):    █████████████████████████████████████████████ 45.6%  (228 usuarios)
+BAIXO (Cluster 3):       ███████████████ 14.8%  (74 usuarios)
 
 >>> 77.2% dos usuarios em situacao de risco financeiro (386 de 500)
 ```
@@ -78,7 +78,7 @@ BAIXO (Cluster 3):       ████████████████ 15.6% 
 | `media_renda` | Renda media mensal | R$ 1.500 | R$ 3.800 | R$ 12.000 | R$ 2.100 |
 | `media_gasto` | Gasto medio mensal | R$ 1.800 | R$ 4.200 | R$ 9.500 | R$ 1.900 |
 | `taxa_poupanca` | (renda-gasto)/renda | -96% | -31.6% | +67% | 42% |
-| `pct_gastos_essenciais` | % em necessidades | 2% | 5% | 12% | 2% |
+| `pct_gastos_essenciais` | % em necessidades | 70% | 81% | 88% | 3% |
 | `std_gasto` | Variabilidade | R$ 500 | R$ 1.800 | R$ 4.500 | R$ 800 |
 
 ### Matriz de Correlacao
@@ -99,8 +99,8 @@ BAIXO (Cluster 3):       ████████████████ 15.6% 
 
 | Metrica | Target | Resultado | Status | Interpretacao |
 |---------|--------|-----------|--------|---------------|
-| Silhouette Score | > 0.50 | **0.257** | Abaixo | Sobreposicao moderada |
-| Davies-Bouldin | < 1.00 | **1.196** | Proximo | Separacao aceitavel |
+| Silhouette Score | > 0.50 | **0.267** | Abaixo | Sobreposicao moderada |
+| Davies-Bouldin | < 1.00 | **1.184** | Proximo | Separacao aceitavel |
 | Variancia PCA (2D) | > 70% | **82.7%** | OK | Boa representacao |
 | Interpretabilidade | Sim | **Sim** | OK | Perfis claros |
 
@@ -120,9 +120,9 @@ BAIXO (Cluster 3):       ████████████████ 15.6% 
 
 | Cluster | Silhouette Medio | Interpretacao |
 |---------|------------------|---------------|
-| 0 - Endividados Severos | 0.20-0.30 | Sobreposicao moderada |
+| 0 - Endividados Moderados | 0.20-0.30 | Sobreposicao moderada |
 | 1 - Em Alerta | 0.15-0.25 | Maior sobreposicao |
-| 2 - Endividados Moderados | 0.20-0.30 | Sobreposicao moderada |
+| 2 - Endividados Severos | 0.20-0.30 | Sobreposicao moderada |
 | 3 - Poupadores | 0.35-0.45 | Melhor separacao |
 
 ### Conclusao da Validacao
@@ -162,19 +162,19 @@ BAIXO (Cluster 3):       ████████████████ 15.6% 
 
 | Perfil | N | Economia/Usuario | Economia Total/Mes |
 |--------|---|------------------|-------------------|
-| Endividados Severos | 59 | R$ 400-600 | R$ 23.600-35.400 |
-| Endividados Moderados | 167 | R$ 300-450 | R$ 50.100-75.150 |
-| Em Alerta | 196 | R$ 150-250 | R$ 29.400-49.000 |
-| Poupadores | 78 | R$ 50-100 | R$ 3.900-7.800 |
-| **TOTAL** | **500** | **R$ 214-323** | **R$ 107.000-167.350** |
+| Endividados Severos | 112 | R$ 400-600 | R$ 44.800-67.200 |
+| Endividados Moderados | 86 | R$ 300-450 | R$ 25.800-38.700 |
+| Em Alerta | 228 | R$ 150-250 | R$ 34.200-57.000 |
+| Poupadores | 74 | R$ 50-100 | R$ 3.700-7.400 |
+| **TOTAL** | **500** | **R$ 217-340** | **R$ 108.500-170.300** |
 
 ### Projecao Anual
 
 | Cenario | Mensal | Anual |
 |---------|--------|-------|
-| Conservador | R$ 107.000 | **R$ 1.284.000** |
-| Otimista | R$ 167.350 | **R$ 2.008.200** |
-| Medio | R$ 137.175 | **R$ 1.646.100** |
+| Conservador | R$ 108.500 | **R$ 1.302.000** |
+| Otimista | R$ 170.300 | **R$ 2.043.600** |
+| Medio | R$ 139.400 | **R$ 1.672.800** |
 
 ---
 
@@ -233,13 +233,13 @@ BAIXO (Cluster 3):       ████████████████ 15.6% 
    - R$ 411/mes em media
    - Potencial de 50-70% de reducao
 
-3. **Apenas 15.6% conseguem poupar**
+3. **Apenas 14.8% conseguem poupar**
    - Maioria precisa de educacao financeira basica
    - Cluster 3 (Poupadores) e minoria
 
 4. **Taxa de poupanca varia drasticamente**
-   - De -89% (Cluster 0) a +25% (Cluster 3)
-   - Diferenca de 114 pontos percentuais
+   - De -80% (Cluster 2) a +26% (Cluster 3)
+   - Diferenca de 106 pontos percentuais
 
 5. **Correlacao renda-gasto e alta (0.72)**
    - Quem ganha mais, gasta mais
@@ -314,4 +314,5 @@ BAIXO (Cluster 3):       ████████████████ 15.6% 
 ---
 
 *Documento gerado em 27 de Janeiro de 2026*
+*Ultima atualizacao: 29 de Janeiro de 2026*
 *Economiza+ MVP - Sprint 1*

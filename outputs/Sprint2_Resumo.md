@@ -27,7 +27,7 @@
 
 | Hipotese | Descricao | Target | Resultado | Status |
 |----------|-----------|--------|-----------|--------|
-| H1 | Recomendacoes geram economia | 15-20% | 8.11% (19.22% Cluster 0) | Parcial |
+| H1 | Recomendacoes geram economia | 15-20% | 8.60% (17.56% Cluster 2) | Parcial |
 | H6 | Isolation Forest detecta anomalias | P>0.85, R>0.80 | P=47.3%, R=47.4% | Nao validada |
 
 ### Escopo Entregue
@@ -101,26 +101,26 @@ economiza-ia/
 
 ### Regras por Cluster
 
-#### Cluster 0: Endividados Severos (Prioridade CRITICA)
+#### Cluster 0: Endividados Moderados (Prioridade ALTA)
 
 | ID | Categoria | Acao | Reducao | Economia Media |
 |----|-----------|------|---------|----------------|
-| R0_1 | Alimentacao_Fora | Cortar | 70% | R$ 288/mes |
-| R0_2 | Vestuario | Eliminar nao essencial | 90% | R$ 150/mes |
+| R0_1 | Alimentacao_Fora | Reduzir | 50% | R$ 246/mes |
+| R0_2 | Vestuario | Cortar | 50% | R$ 109/mes |
 
 #### Cluster 1: Em Alerta (Prioridade MODERADA)
 
 | ID | Categoria | Acao | Reducao | Economia Media |
 |----|-----------|------|---------|----------------|
-| R1_1 | Alimentacao_Fora | Reduzir | 40% | R$ 165/mes |
-| R1_2 | Lazer | Limitar | 35% | R$ 55/mes |
+| R1_1 | Alimentacao_Fora | Reduzir | 40% | R$ 119/mes |
+| R1_2 | Lazer | Limitar | 35% | R$ 41/mes |
 
-#### Cluster 2: Endividados Moderados (Prioridade ALTA)
+#### Cluster 2: Endividados Severos (Prioridade CRITICA)
 
 | ID | Categoria | Acao | Reducao | Economia Media |
 |----|-----------|------|---------|----------------|
-| R2_1 | Alimentacao_Fora | Reduzir | 50% | R$ 206/mes |
-| R2_2 | Vestuario | Cortar | 50% | R$ 99/mes |
+| R2_1 | Alimentacao_Fora | Cortar | 70% | R$ 379/mes |
+| R2_2 | Vestuario | Eliminar nao essencial | 90% | R$ 234/mes |
 
 #### Cluster 3: Poupadores (Prioridade BAIXA)
 
@@ -143,11 +143,11 @@ pct_economia = economia_total / renda_media * 100
 
 | Cluster | N | Economia Media | % Renda | Target |
 |---------|---|----------------|---------|--------|
-| Endividados Severos | 59 | R$ 698,53 | 19.22% | OK |
-| Em Alerta | 196 | R$ 162,59 | 5.37% | Abaixo |
-| Endividados Moderados | 167 | R$ 320,13 | 10.38% | Abaixo |
-| Poupadores | 78 | R$ 120,90 | 1.72% | Abaixo |
-| **TOTAL** | **500** | **R$ 271,94** | **8.11%** | **Parcial** |
+| Endividados Moderados (C0) | 86 | R$ 354,69 | 11.41% | Abaixo |
+| Em Alerta (C1) | 228 | R$ 160,42 | 5.38% | Abaixo |
+| Endividados Severos (C2) | 112 | R$ 613,49 | 17.56% | OK |
+| Poupadores (C3) | 74 | R$ 123,29 | 1.72% | Abaixo |
+| **TOTAL** | **500** | **R$ 289,83** | **8.60%** | **Parcial** |
 
 ---
 
@@ -298,12 +298,12 @@ resultado = pipeline.analisar_usuario('user_0001', transacoes)
 
 | Aspecto | Resultado |
 |---------|-----------|
-| Media geral | 8.11% (abaixo do target 15-20%) |
-| Cluster 0 | 19.22% (ATINGIU target) |
-| Clusters 1-3 | 1.7% - 10.4% (abaixo do target) |
-| Impacto total | R$ 135.972/mes (500 usuarios) |
+| Media geral | 8.60% (abaixo do target 15-20%) |
+| Cluster 2 | 17.56% (ATINGIU target) |
+| Clusters 0, 1, 3 | 1.7% - 11.4% (abaixo do target) |
+| Impacto total | R$ 144.912,93/mes (500 usuarios) |
 
-**Conclusao:** A hipotese foi parcialmente validada. O sistema funciona e gera economia mensuravel, mas apenas o Cluster 0 (Endividados Severos) atingiu o target de 15-20%.
+**Conclusao:** A hipotese foi parcialmente validada. O sistema funciona e gera economia mensuravel, mas apenas o Cluster 2 (Endividados Severos) atingiu o target de 15-20%.
 
 ### H6: Isolation Forest Detecta Anomalias
 
@@ -423,6 +423,6 @@ resultados = [pipeline.analisar_usuario(u, transacoes) for u in usuarios]
 
 ---
 
-**Documento atualizado em:** 27 de Janeiro de 2026
-**Versao:** 2.0 (Final)
+**Documento atualizado em:** 29 de Janeiro de 2026
+**Versao:** 2.1 (Corrigido)
 **Status:** Publicado

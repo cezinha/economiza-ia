@@ -32,18 +32,18 @@
 
 - [ ] Carregar `usuarios_clustered.csv` e `transacoes.csv`
 - [ ] Definir 2 regras de recomendacao por cluster:
-  - **Cluster 0 (Endividados Severos):**
-    1. Cortar Alimentacao_Fora em 70% (economia: ~R$ 288/mes)
-    2. Eliminar Vestuario nao essencial (economia: ~R$ 150/mes)
+  - **Cluster 0 (Endividados Moderados):**
+    1. Reduzir Alimentacao_Fora em 50% (economia: ~R$ 246/mes)
+    2. Cortar Vestuario em 50% (economia: ~R$ 109/mes)
   - **Cluster 1 (Em Alerta):**
-    1. Reduzir Alimentacao_Fora em 40% (economia: ~R$ 165/mes)
-    2. Limitar Lazer a R$ 100/mes (economia: ~R$ 55/mes)
-  - **Cluster 2 (Endividados Moderados):**
-    1. Reduzir Alimentacao_Fora em 50% (economia: ~R$ 206/mes)
-    2. Cortar Vestuario em 50% (economia: ~R$ 99/mes)
+    1. Reduzir Alimentacao_Fora em 40% (economia: ~R$ 119/mes)
+    2. Limitar Lazer em 35% (economia: ~R$ 41/mes)
+  - **Cluster 2 (Endividados Severos):**
+    1. Cortar Alimentacao_Fora em 70% (economia: ~R$ 379/mes)
+    2. Eliminar Vestuario nao essencial (economia: ~R$ 234/mes)
   - **Cluster 3 (Poupadores):**
-    1. Otimizar gastos com Transporte (economia: ~R$ 50/mes)
-    2. Revisar assinaturas em Telecomunicacoes (economia: ~R$ 30/mes)
+    1. Otimizar gastos com Transporte (economia: ~R$ 87/mes)
+    2. Revisar assinaturas em Telecomunicacoes (economia: ~R$ 36/mes)
 - [ ] Criar funcao `gerar_recomendacoes(user_id, cluster)` -> lista de 2 recomendacoes
 - [ ] Salvar regras em `models/recomendacoes_regras.json`
 
@@ -192,5 +192,6 @@ Artefatos necessarios (ja existem):
 ---
 
 **Documento criado em:** 26 de Janeiro de 2026
-**Versao:** 1.0
+**Ultima atualizacao:** 29 de Janeiro de 2026
+**Versao:** 1.2
 **Status:** Aprovado para execucao

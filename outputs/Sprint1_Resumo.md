@@ -27,10 +27,10 @@
 - 📊 **Dataset:** Representa bem a população de baixa/média renda (renda média R$ 3.800-4.000)
 - 📈 **Correlação:** Positiva forte entre renda e gasto (~0.7-0.8)
 - 👥 **Perfis identificados:** 4 clusters distintos
-  - Endividados Severos (11.8%) - Taxa poupança: -88.6%
-  - Em Alerta (39.2%) - Taxa poupança: -14.8%
-  - Endividados Moderados (33.4%) - Taxa poupança: -57.7%
-  - Poupadores (15.6%) - Taxa poupança: +25.4%
+  - Endividados Severos (22.4%) - Taxa poupança: -79.7%
+  - Em Alerta (45.6%) - Taxa poupança: -24.6%
+  - Endividados Moderados (17.2%) - Taxa poupança: -36.8%
+  - Poupadores (14.8%) - Taxa poupança: +26.0%
 - 💰 **Top 3 categorias para economia:**
   1. Alimentação Fora: R$ 411,64/mês
   2. Vestuário: R$ 197,60/mês
@@ -39,8 +39,8 @@
 - 💡 **Potencial de impacto:** R$ 1,16M - R$ 1,62M/ano em economia estimada
 
 ### Validação da hipótese H2:
-- ⚠️ Silhouette Score: 0.2568 (target: >0.5) - NÃO ATINGIDO
-- ⚠️ Davies-Bouldin Index: 1.1959 (target: <1.0) - PRÓXIMO
+- ⚠️ Silhouette Score: 0.2672 (target: >0.5) - NÃO ATINGIDO
+- ⚠️ Davies-Bouldin Index: 1.1839 (target: <1.0) - PRÓXIMO
 - ✅ Interpretabilidade: Clusters claros e acionáveis - ATINGIDO
 - **Decisão:** Aprovado para MVP com melhorias no Sprint 2
 
@@ -101,10 +101,10 @@
 | 5 | `std_gasto` | Desvio padrão dos gastos mensais | Variabilidade/estabilidade financeira |
 
 **Estatísticas das Features:**
-- **media_renda:** R$ 2.500 - R$ 10.000 (amplitude)
-- **media_gasto:** R$ 2.000 - R$ 8.000 (amplitude)
-- **taxa_poupanca:** -200% a +50% (negativo = endividamento)
-- **pct_gastos_essenciais:** 40% - 80%
+- **media_renda:** R$ 1.645 - R$ 11.614 (amplitude)
+- **media_gasto:** R$ 1.740 - R$ 10.418 (amplitude)
+- **taxa_poupanca:** -100% a +67% (negativo = endividamento)
+- **pct_gastos_essenciais:** 70% - 88% (média 81.4%)
 - **std_gasto:** Indica estabilidade financeira
 
 **Correlações Importantes:**
@@ -142,10 +142,10 @@
 - Separação adequada entre perfis
 
 **Distribuição dos Clusters:**
-- Cluster 0: 59 usuários (11.8%)
-- Cluster 1: 196 usuários (39.2%)
-- Cluster 2: 167 usuários (33.4%)
-- Cluster 3: 78 usuários (15.6%)
+- Cluster 0 (Endividados Moderados): 86 usuários (17.2%)
+- Cluster 1 (Em Alerta): 228 usuários (45.6%)
+- Cluster 2 (Endividados Severos): 112 usuários (22.4%)
+- Cluster 3 (Poupadores): 74 usuários (14.8%)
 
 **Artefatos Gerados:**
 - `models/scaler.pkl` (normalizador)
@@ -162,7 +162,7 @@
 
 **Métricas de Validação:**
 
-#### Silhouette Score: 0.2568
+#### Silhouette Score: 0.2672
 - **Target:** > 0.5
 - **Status:** ❌ NÃO ATINGIDO
 - **Interpretação:** Clusters com sobreposição moderada
@@ -172,7 +172,7 @@
   - Cluster 2: ~0.20-0.30
   - Cluster 3: ~0.35-0.45 (melhor separação)
 
-#### Davies-Bouldin Index: 1.1959
+#### Davies-Bouldin Index: 1.1839
 - **Target:** < 1.0
 - **Status:** ⚠️ PRÓXIMO DO TARGET
 - **Interpretação:** Separação aceitável, mas com espaço para melhoria
@@ -205,36 +205,36 @@ Apesar das métricas abaixo do ideal, **aceitamos os resultados** para o MVP por
 
 **Perfis Identificados:**
 
-| Cluster | Nome | Usuários | % Base | Renda Média | Gasto Médio | Saldo | Taxa Poupança |
-|---------|------|----------|--------|-------------|-------------|-------|---------------|
-| 0 | **Endividados Severos** | 59 | 11.8% | R$ 3.693 | R$ 7.298 | -R$ 3.605 | **-88.6%** |
-| 1 | **Em Alerta** | 196 | 39.2% | R$ 3.131 | R$ 3.469 | -R$ 337 | **-14.8%** |
-| 2 | **Endividados Moderados** | 167 | 33.4% | R$ 3.155 | R$ 4.900 | -R$ 1.746 | **-57.7%** |
-| 3 | **Poupadores** | 78 | 15.6% | R$ 7.194 | R$ 5.236 | +R$ 1.958 | **+25.4%** |
+| Cluster | Nome | Usuários | % Base | Taxa Poupança |
+|---------|------|----------|--------|---------------|
+| 0 | **Endividados Moderados** | 86 | 17.2% | **-36.8%** |
+| 1 | **Em Alerta** | 228 | 45.6% | **-24.6%** |
+| 2 | **Endividados Severos** | 112 | 22.4% | **-79.7%** |
+| 3 | **Poupadores** | 74 | 14.8% | **+26.0%** |
 
 **Descrição Detalhada dos Perfis:**
 
-#### 🔴 Cluster 0: Endividados Severos (11.8%)
-- **Característica Principal:** Gastos quase 2× a renda
-- **Risco:** CRÍTICO - Endividamento grave
-- **Ação Prioritária:** Intervenção urgente + educação financeira
-- **Potencial de Economia:** Alto (se houver corte drástico)
-
-#### 🟡 Cluster 1: Em Alerta (39.2%)
-- **Característica Principal:** Gastos levemente acima da renda
-- **Risco:** MODERADO - Tendência ao endividamento
-- **Ação Prioritária:** Orientação preventiva + dicas de economia
-- **Potencial de Economia:** Médio
-
-#### 🟠 Cluster 2: Endividados Moderados (33.4%)
-- **Característica Principal:** Gastos 55% acima da renda
+#### 🟠 Cluster 0: Endividados Moderados (17.2%)
+- **Característica Principal:** Gastos ~37% acima da renda
 - **Risco:** ALTO - Endividamento significativo
 - **Ação Prioritária:** Plano de corte de gastos + acompanhamento
 - **Potencial de Economia:** Alto
 
-#### 🟢 Cluster 3: Poupadores (15.6%)
+#### 🟡 Cluster 1: Em Alerta (45.6%)
+- **Característica Principal:** Gastos ~25% acima da renda
+- **Risco:** MODERADO - Tendência ao endividamento
+- **Ação Prioritária:** Orientação preventiva + dicas de economia
+- **Potencial de Economia:** Médio
+
+#### 🔴 Cluster 2: Endividados Severos (22.4%)
+- **Característica Principal:** Gastos quase 2× a renda
+- **Risco:** CRÍTICO - Endividamento grave (-79.7% taxa poupança)
+- **Ação Prioritária:** Intervenção urgente + educação financeira
+- **Potencial de Economia:** Alto (se houver corte drástico)
+
+#### 🟢 Cluster 3: Poupadores (14.8%)
 - **Característica Principal:** Renda alta + controle de gastos
-- **Risco:** BAIXO - Situação financeira saudável
+- **Risco:** BAIXO - Situação financeira saudável (+26% taxa poupança)
 - **Ação Prioritária:** Produtos de investimento + otimização fiscal
 - **Potencial de Economia:** Baixo (já economizam)
 
@@ -263,21 +263,21 @@ Apesar das métricas abaixo do ideal, **aceitamos os resultados** para o MVP por
    - Impacto: Médio
 
 **Gastos Médios por Cluster (por categoria):**
-- Cluster 0 (Endividados Severos): Gastos muito altos em todas as categorias
-- Cluster 2 (Endividados Moderados): Gastos altos em categorias não essenciais
+- Cluster 2 (Endividados Severos): Gastos muito altos em todas as categorias
+- Cluster 0 (Endividados Moderados): Gastos altos em categorias não essenciais
 - Cluster 1 (Em Alerta): Gastos moderados, mas sem margem
 - Cluster 3 (Poupadores): Gastos controlados em não essenciais
 
 **Recomendações por Perfil:**
 
-**Endividados Severos (Cluster 0):**
+**Endividados Severos (Cluster 2):**
 - Prioridade MÁXIMA: Intervenção urgente + educação financeira
 - Ação 1: Cortar alimentação fora de casa drasticamente (economia de R$ 300-400/mês)
 - Ação 2: Eliminar vestuário não essencial (economia de R$ 150-200/mês)
 - Ação 3: Suspender lazer pago (economia de R$ 100-150/mês)
 - Meta: Reduzir gastos em 40-50%
 
-**Endividados Moderados (Cluster 2):**
+**Endividados Moderados (Cluster 0):**
 - Prioridade ALTA: Plano de corte de gastos + acompanhamento
 - Ação 1: Reduzir alimentação fora de casa (economia de R$ 200-250/mês)
 - Ação 2: Reduzir vestuário significativamente (economia de R$ 100-120/mês)
@@ -305,8 +305,8 @@ Apesar das métricas abaixo do ideal, **aceitamos os resultados** para o MVP por
 
 | Métrica | Target | Resultado | Status | Observação |
 |---------|--------|-----------|--------|------------|
-| Silhouette Score | > 0.5 | 0.2568 | NÃO ATINGIDO | Sobreposição entre clusters |
-| Davies-Bouldin Index | < 1.0 | 1.1959 | PRÓXIMO | Ligeiramente acima do target |
+| Silhouette Score | > 0.5 | 0.2672 | NÃO ATINGIDO | Sobreposição entre clusters |
+| Davies-Bouldin Index | < 1.0 | 1.1839 | PRÓXIMO | Ligeiramente acima do target |
 | Interpretabilidade | Sim | Sim | ATINGIDO | Perfis claros e acionáveis |
 | Separação de Perfis | Clara | Clara | ATINGIDO | Diferenças significativas |
 
@@ -319,7 +319,7 @@ Apesar das métricas abaixo do ideal, **aceitamos os resultados** para o MVP por
 
 **Motivos para Aceitar os Resultados:**
 1. Perfis têm significado claro de negócio
-2. Diferenças entre clusters são significativas (taxa de poupança varia de -89% a +25%)
+2. Diferenças entre clusters são significativas (taxa de poupança varia de -80% a +26%)
 3. Permite recomendações personalizadas imediatas
 4. Base sólida para iteração e melhoria
 
@@ -363,7 +363,7 @@ Apesar das métricas abaixo do ideal, **aceitamos os resultados** para o MVP por
 | Notebooks Executados | 6 | 6 | 100% |
 | Features Criadas | ≥5 | 5 | 100% |
 | Clustering Implementado | Sim | K-means (K=4) | Concluído |
-| Silhouette Score | >0.5 | 0.2568 | 51% |
+| Silhouette Score | >0.5 | 0.2672 | 51% |
 | Clusters Interpretáveis | Sim | Sim | Concluído |
 | Perfis Documentados | Sim | 4 perfis | Concluído |
 | Artefatos Salvos | Todos | 15+ arquivos | Concluído |
@@ -459,34 +459,34 @@ Apesar das métricas abaixo do ideal, **aceitamos os resultados** para o MVP por
 
 ## Perfis de Usuários - Resumo Executivo
 
-### 🔴 Grupo Crítico Severo (11.8% da base)
-**Cluster 0 - Endividados Severos**
-- 59 usuários em situação crítica extrema
-- Taxa de poupança: -89%
+### 🔴 Grupo Crítico Severo (22.4% da base)
+**Cluster 2 - Endividados Severos**
+- 112 usuários em situação crítica extrema
+- Taxa de poupança: -79.7%
 - **Risco:** CRÍTICO - Endividamento grave (gastos quase 2× a renda)
 - **Ação:** Intervenção URGENTE + educação financeira intensiva
 - **Meta:** Reduzir gastos em 40-50%
 
-### 🟠 Grupo Crítico Moderado (33.4% da base)
-**Cluster 2 - Endividados Moderados**
-- 167 usuários em situação crítica
-- Taxa de poupança: -58%
-- **Risco:** ALTO - Endividamento significativo (gastos 55% acima da renda)
+### 🟠 Grupo Crítico Moderado (17.2% da base)
+**Cluster 0 - Endividados Moderados**
+- 86 usuários em situação crítica
+- Taxa de poupança: -36.8%
+- **Risco:** ALTO - Endividamento significativo (gastos ~37% acima da renda)
 - **Ação:** Plano de corte de gastos + acompanhamento regular
 - **Meta:** Reduzir gastos em 25-35%
 
-### 🟡 Grupo de Risco (39.2% da base)
+### 🟡 Grupo de Risco (45.6% da base)
 **Cluster 1 - Em Alerta**
-- 196 usuários com déficit leve
-- Taxa de poupança: -15%
+- 228 usuários com déficit moderado
+- Taxa de poupança: -24.6%
 - **Risco:** MODERADO - Tendência ao endividamento
 - **Ação:** Orientação preventiva + dicas práticas
 - **Meta:** Transformar em pequeno superávit (+5%)
 
-### 🟢 Grupo Saudável (15.6% da base)
+### 🟢 Grupo Saudável (14.8% da base)
 **Cluster 3 - Poupadores**
-- 78 usuários com situação financeira estável
-- Taxa de poupança: +25%
+- 74 usuários com situação financeira estável
+- Taxa de poupança: +26.0%
 - **Risco:** BAIXO - Situação financeira saudável
 - **Ação:** Produtos de investimento + otimização fiscal
 - **Meta:** Aumentar rentabilidade dos investimentos
@@ -499,10 +499,10 @@ Apesar das métricas abaixo do ideal, **aceitamos os resultados** para o MVP por
 
 | Perfil | Cluster | Economia Potencial | Principais Categorias |
 |--------|---------|-------------------|----------------------|
-| Endividados Severos | 0 (11.8%) | R$ 400-600/mês | Alimentação Fora, Vestuário, Lazer |
-| Endividados Moderados | 2 (33.4%) | R$ 300-450/mês | Alimentação Fora, Transporte, Vestuário |
-| Em Alerta | 1 (39.2%) | R$ 150-250/mês | Alimentação Fora, Lazer |
-| Poupadores | 3 (15.6%) | R$ 50-100/mês | Otimizações pontuais |
+| Endividados Severos | 2 (22.4%) | R$ 400-600/mês | Alimentação Fora, Vestuário, Lazer |
+| Endividados Moderados | 0 (17.2%) | R$ 300-450/mês | Alimentação Fora, Transporte, Vestuário |
+| Em Alerta | 1 (45.6%) | R$ 150-250/mês | Alimentação Fora, Lazer |
+| Poupadores | 3 (14.8%) | R$ 50-100/mês | Otimizações pontuais |
 
 ### Impacto Total Estimado
 - **Usuários em risco (386):** Economia média de R$ 250-350/mês
@@ -571,8 +571,8 @@ O MVP está pronto para avançar para o Sprint 2 com foco em:
 
 #### 2. **Nomenclatura dos Clusters Refinada** ✅ RESOLVIDO
 - **Problema Inicial:** Clusters 0 e 2 tinham nomes similares ("Endividados") mas comportamentos diferentes
-- **Causa:** Diferença de severidade (-89% vs -58%) não estava clara na nomenclatura
-- **Solução Implementada:** Renomeados para "Endividados Severos" (Cluster 0) e "Endividados Moderados" (Cluster 2)
+- **Causa:** Diferença de severidade (-80% vs -37%) não estava clara na nomenclatura
+- **Solução Implementada:** Renomeados para "Endividados Severos" (Cluster 2) e "Endividados Moderados" (Cluster 0)
 - **Aprendizado:** Nomenclatura específica evita confusão e comunica melhor o nível de risco
 - **Resultado:** Perfis agora têm identidade única e clara diferenciação
 
@@ -625,7 +625,7 @@ O MVP está pronto para avançar para o Sprint 2 com foco em:
 - **Potencial:** 50-70% de redução possível
 - **Estratégia:** Primeira recomendação para todos os perfis em risco
 
-#### 3. **Poupadores são Apenas 15.6% da Base**
+#### 3. **Poupadores são Apenas 14.8% da Base**
 - **Implicação:** Maioria precisa de educação financeira básica
 - **Estratégia:** Foco em mover usuários de "Em Alerta" para "Poupadores"
 
@@ -697,8 +697,8 @@ O MVP está pronto para avançar para o Sprint 2 com foco em:
 
 ---
 
-**Documento gerado em:** 25 de Janeiro de 2026  
-**Versão:** 1.1  
-**Autor:** Equipe Economiza+ Data Science  
-**Notebooks de referência:** 01 a 06 (Sprint 1)  
-**Última atualização:** Adicionada seção "Lições Aprendidas"
+**Documento gerado em:** 25 de Janeiro de 2026
+**Versão:** 1.3
+**Autor:** Equipe Economiza+ Data Science
+**Notebooks de referência:** 01 a 06 (Sprint 1)
+**Última atualização:** 29/01/2026 - Revisão completa após re-execução dos notebooks

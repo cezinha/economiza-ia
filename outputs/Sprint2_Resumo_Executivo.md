@@ -21,9 +21,9 @@ Implementar sistema de recomendacoes personalizadas por perfil financeiro e dete
 | Modelos treinados | 2 (Isolation Forest + Pipeline) |
 | Usuarios analisados | 500 |
 | Transacoes processadas | 191.231 |
-| Economia mensal projetada | R$ 135.972 |
-| Economia anual projetada | R$ 1,63M |
-| Economia media por usuario | R$ 272/mes |
+| Economia mensal projetada | R$ 144.912,93 |
+| Economia anual projetada | R$ 1,74M |
+| Economia media por usuario | R$ 289,83/mes |
 
 ---
 
@@ -33,19 +33,19 @@ Implementar sistema de recomendacoes personalizadas por perfil financeiro e dete
 
 | Metrica | Target | Resultado | Status |
 |---------|--------|-----------|--------|
-| Economia media (% renda) | 15-20% | **8.11%** | Parcial |
+| Economia media (% renda) | 15-20% | **8.60%** | Parcial |
 | Economia mediana (% renda) | 15-20% | 6.72% | Abaixo |
-| Cluster 0 especifico | 15-20% | **19.22%** | OK |
+| Cluster 2 especifico | 15-20% | **17.56%** | OK |
 
 ### Economia por Cluster (Detalhado)
 
 | Cluster | N | Economia Media | % Renda | Economia Total/Mes | Status |
 |---------|---|----------------|---------|-------------------|--------|
-| Endividados Severos | 59 | **R$ 698,53** | **19.22%** | R$ 41.213 | OK |
-| Em Alerta | 196 | R$ 162,59 | 5.37% | R$ 31.868 | Abaixo |
-| Endividados Moderados | 167 | R$ 320,13 | 10.38% | R$ 53.462 | Abaixo |
-| Poupadores | 78 | R$ 120,90 | 1.72% | R$ 9.430 | Abaixo |
-| **TOTAL** | **500** | **R$ 271,94** | **8.11%** | **R$ 135.972** | **Parcial** |
+| Endividados Moderados (C0) | 86 | R$ 354,69 | 11.41% | R$ 30.503 | Abaixo |
+| Em Alerta (C1) | 228 | R$ 160,42 | 5.38% | R$ 36.576 | Abaixo |
+| Endividados Severos (C2) | 112 | **R$ 613,49** | **17.56%** | R$ 68.711 | OK |
+| Poupadores (C3) | 74 | R$ 123,29 | 1.72% | R$ 9.123 | Abaixo |
+| **TOTAL** | **500** | **R$ 289,83** | **8.60%** | **R$ 144.912** | **Parcial** |
 
 ### Visualizacao: Economia por Cluster
 
@@ -63,23 +63,23 @@ Implementar sistema de recomendacoes personalizadas por perfil financeiro e dete
 
 | Cluster | Prioridade | Regra | Categoria | Acao | % Corte |
 |---------|------------|-------|-----------|------|---------|
-| 0 - Endividados Severos | CRITICA | R0_1 | Alimentacao_Fora | Cortar | **70%** |
-| 0 - Endividados Severos | CRITICA | R0_2 | Vestuario | Eliminar | **90%** |
+| 0 - Endividados Moderados | ALTA | R0_1 | Alimentacao_Fora | Reduzir | 50% |
+| 0 - Endividados Moderados | ALTA | R0_2 | Vestuario | Cortar | 50% |
 | 1 - Em Alerta | MODERADA | R1_1 | Alimentacao_Fora | Reduzir | 40% |
 | 1 - Em Alerta | MODERADA | R1_2 | Lazer | Limitar | 35% |
-| 2 - Endividados Moderados | ALTA | R2_1 | Alimentacao_Fora | Reduzir | 50% |
-| 2 - Endividados Moderados | ALTA | R2_2 | Vestuario | Cortar | 50% |
+| 2 - Endividados Severos | CRITICA | R2_1 | Alimentacao_Fora | Cortar | **70%** |
+| 2 - Endividados Severos | CRITICA | R2_2 | Vestuario | Eliminar | **90%** |
 | 3 - Poupadores | BAIXA | R3_1 | Transporte | Otimizar | 15% |
 | 3 - Poupadores | BAIXA | R3_2 | Telecomunicacoes | Revisar | 20% |
 
 ### Detalhamento das Regras por Cluster
 
-#### Cluster 0: Endividados Severos (Prioridade CRITICA)
+#### Cluster 0: Endividados Moderados (Prioridade ALTA)
 
 | Regra | Titulo | Mensagem | Dica |
 |-------|--------|----------|------|
-| R0_1 | Cortar refeicoes fora de casa | Reduza drasticamente refeicoes fora de casa | Planeje cardapio semanal |
-| R0_2 | Suspender compras de vestuario | Suspenda compras nao essenciais por 3 meses | Revise guarda-roupa |
+| R0_1 | Reduzir significativamente | Reduza pela metade | Cozinhe em quantidade |
+| R0_2 | Cortar gastos vestuario | Reduza compras pela metade | Compre apenas essenciais |
 
 #### Cluster 1: Em Alerta (Prioridade MODERADA)
 
@@ -88,12 +88,12 @@ Implementar sistema de recomendacoes personalizadas por perfil financeiro e dete
 | R1_1 | Reduzir refeicoes fora | Limite a 1-2x por semana | Leve marmita 3x/semana |
 | R1_2 | Estabelecer teto para lazer | Defina limite mensal | Busque alternativas gratuitas |
 
-#### Cluster 2: Endividados Moderados (Prioridade ALTA)
+#### Cluster 2: Endividados Severos (Prioridade CRITICA)
 
 | Regra | Titulo | Mensagem | Dica |
 |-------|--------|----------|------|
-| R2_1 | Reduzir significativamente | Reduza pela metade | Cozinhe em quantidade |
-| R2_2 | Cortar gastos vestuario | Reduza compras pela metade | Compre apenas essenciais |
+| R2_1 | Cortar refeicoes fora de casa | Reduza drasticamente refeicoes fora de casa | Planeje cardapio semanal |
+| R2_2 | Suspender compras de vestuario | Suspenda compras nao essenciais por 3 meses | Revise guarda-roupa |
 
 #### Cluster 3: Poupadores (Prioridade BAIXA)
 
@@ -114,10 +114,10 @@ Implementar sistema de recomendacoes personalizadas por perfil financeiro e dete
 
 | Cluster | Taxa Atual | Taxa Projetada | Melhoria | Impacto |
 |---------|------------|----------------|----------|---------|
-| Endividados Severos | **-88.6%** | -81.7% | **+6.9pp** | Alto |
-| Em Alerta | -14.8% | -9.4% | +5.4pp | Medio |
-| Endividados Moderados | -57.7% | -48.3% | **+9.4pp** | Alto |
-| Poupadores | +25.4% | +27.1% | +1.7pp | Baixo |
+| Endividados Moderados (C0) | -36.8% | -26.4% | **+10.4pp** | Alto |
+| Em Alerta (C1) | -24.6% | -19.3% | +5.3pp | Medio |
+| Endividados Severos (C2) | **-79.7%** | -69.2% | **+10.5pp** | Alto |
+| Poupadores (C3) | +26.0% | +27.8% | +1.7pp | Baixo |
 
 ### Visualizacao: Poupanca Atual vs Projetada
 
@@ -237,7 +237,7 @@ resultado = pipeline.analisar_usuario(user_id, transacoes)
 
 | Campo | Valor |
 |-------|-------|
-| Cluster | 0 - Endividados Severos |
+| Cluster | 2 - Endividados Severos |
 | Prioridade | CRITICA |
 | Renda Media | R$ 4.148,90 |
 | Gasto Medio | R$ 7.084,61 |
@@ -263,16 +263,16 @@ resultado = pipeline.analisar_usuario(user_id, transacoes)
 
 | User ID | Cluster | Taxa Poup. | Economia | % Renda | Anomalias |
 |---------|---------|------------|----------|---------|-----------|
-| user_0002 | Endividados Severos | -70.8% | R$ 842 | 20.3% | 28 |
-| user_0038 | Endividados Severos | -17.9% | R$ 795 | 13.4% | 45 |
-| user_0008 | Endividados Severos | -24.7% | R$ 746 | 15.4% | 26 |
-| user_0004 | Endividados Moderados | -14.5% | R$ 311 | 9.3% | 11 |
-| user_0011 | Endividados Moderados | -59.6% | R$ 395 | 16.6% | 9 |
-| user_0013 | Endividados Moderados | -59.6% | R$ 542 | 13.0% | 42 |
-| user_0006 | Endividados Moderados | +31.8% | R$ 152 | 4.3% | 5 |
-| user_0007 | Endividados Moderados | +47.3% | R$ 295 | 4.0% | 8 |
-| user_0001 | Endividados Moderados | +68.7% | R$ 290 | 2.4% | 14 |
-| user_0003 | Endividados Moderados | +47.0% | R$ 187 | 2.9% | 11 |
+| user_0002 | Endividados Severos (C2) | -70.8% | R$ 842 | 20.3% | 28 |
+| user_0038 | Endividados Severos (C2) | -17.9% | R$ 795 | 13.4% | 45 |
+| user_0008 | Endividados Severos (C2) | -24.7% | R$ 746 | 15.4% | 26 |
+| user_0004 | Em Alerta (C1) | -14.5% | R$ 311 | 9.3% | 11 |
+| user_0011 | Endividados Moderados (C0) | -59.6% | R$ 395 | 16.6% | 9 |
+| user_0013 | Endividados Moderados (C0) | -59.6% | R$ 542 | 13.0% | 42 |
+| user_0006 | Em Alerta (C1) | +31.8% | R$ 152 | 4.3% | 5 |
+| user_0007 | Poupadores (C3) | +47.3% | R$ 295 | 4.0% | 8 |
+| user_0001 | Poupadores (C3) | +68.7% | R$ 290 | 2.4% | 14 |
+| user_0003 | Poupadores (C3) | +47.0% | R$ 187 | 2.9% | 11 |
 
 ### Visualizacao: Resultados do Pipeline
 
@@ -286,13 +286,13 @@ resultado = pipeline.analisar_usuario(user_id, transacoes)
 
 | Cluster | Arquivo | Descricao |
 |---------|---------|-----------|
-| 0 | `demo_cluster_0.png` | Endividados Severos |
+| 0 | `demo_cluster_0.png` | Endividados Moderados |
 | 1 | `demo_cluster_1.png` | Em Alerta |
-| 2 | `demo_cluster_2.png` | Endividados Moderados |
+| 2 | `demo_cluster_2.png` | Endividados Severos |
 | 3 | `demo_cluster_3.png` | Poupadores |
 | Todos | `demo_comparativo_perfis.png` | Comparativo |
 
-### Dashboard Exemplo: Endividados Severos
+### Dashboard Exemplo: Endividados Moderados (C0)
 
 ![Demo Cluster 0](demo_cluster_0.png)
 
@@ -308,26 +308,26 @@ resultado = pipeline.analisar_usuario(user_id, transacoes)
 
 | Periodo | Valor |
 |---------|-------|
-| Mensal | **R$ 135.972** |
-| Trimestral | R$ 407.916 |
-| Semestral | R$ 815.833 |
-| Anual | **R$ 1.631.666** |
+| Mensal | **R$ 144.912,93** |
+| Trimestral | R$ 434.739 |
+| Semestral | R$ 869.478 |
+| Anual | **R$ 1.738.955** |
 
 ### Impacto por Cluster
 
 | Cluster | N | Economia Mensal | Economia Anual | % do Total |
 |---------|---|-----------------|----------------|------------|
-| Endividados Severos | 59 | R$ 41.213 | R$ 494.558 | 30.3% |
-| Em Alerta | 196 | R$ 31.868 | R$ 382.410 | 23.4% |
-| Endividados Moderados | 167 | R$ 53.462 | R$ 641.541 | 39.3% |
-| Poupadores | 78 | R$ 9.430 | R$ 113.157 | 6.9% |
+| Endividados Moderados (C0) | 86 | R$ 30.503 | R$ 366.040 | 21.1% |
+| Em Alerta (C1) | 228 | R$ 36.576 | R$ 438.907 | 25.2% |
+| Endividados Severos (C2) | 112 | R$ 68.711 | R$ 824.532 | 47.4% |
+| Poupadores (C3) | 74 | R$ 9.123 | R$ 109.476 | 6.3% |
 
 ### ROI Potencial
 
 Se 50% dos usuarios seguirem as recomendacoes:
-- **Economia real:** R$ 815.833/ano
+- **Economia real:** R$ 869.478/ano
 - **Usuarios impactados:** 250
-- **Media por usuario:** R$ 3.263/ano
+- **Media por usuario:** R$ 3.478/ano
 
 ---
 
@@ -397,10 +397,10 @@ Se 50% dos usuarios seguirem as recomendacoes:
 
 | # | Insight | Impacto |
 |---|---------|---------|
-| 1 | Cluster 0 e unico que atinge target H1 (19.22%) | Regras agressivas funcionam para casos criticos |
+| 1 | Cluster 2 e unico que atinge target H1 (17.56%) | Regras agressivas funcionam para casos criticos |
 | 2 | H6 falhou por limitacao do dataset | Anomalias aleatorias nao criam padroes |
 | 3 | Pipeline processa 20 usuarios/segundo | Escalavel para producao |
-| 4 | Economia de R$ 1,6M/ano para 500 usuarios | ROI significativo |
+| 4 | Economia de R$ 1,74M/ano para 500 usuarios | ROI significativo |
 | 5 | 77% dos usuarios se beneficiam | Grande potencial de impacto social |
 
 ---
@@ -455,7 +455,7 @@ Se 50% dos usuarios seguirem as recomendacoes:
 | 6 notebooks executados | OK |
 | Pipeline funcional | OK |
 | Demonstracao completa | OK |
-| H1 validada | PARCIAL (Cluster 0 OK) |
+| H1 validada | PARCIAL (Cluster 2 OK) |
 | H6 validada | NAO (dataset) |
 | Documentacao | OK |
 | Handoff Sprint 3 | OK |
@@ -464,9 +464,9 @@ Se 50% dos usuarios seguirem as recomendacoes:
 
 **Sprint 2 concluido com sucesso parcial:**
 
-- Sistema de recomendacoes funcional com economia de **R$ 1,6M/ano**
+- Sistema de recomendacoes funcional com economia de **R$ 1,74M/ano**
 - Pipeline integrado processando **20 usuarios/segundo**
-- H1 validada para **Cluster 0** (19.22% economia)
+- H1 validada para **Cluster 2** (17.56% economia)
 - H6 requer **revisao do dataset** para validacao adequada
 
 ---
@@ -493,5 +493,6 @@ Se 50% dos usuarios seguirem as recomendacoes:
 
 ---
 
-*Documento gerado em 27 de Janeiro de 2026*
+*Documento atualizado em 29 de Janeiro de 2026*
+*Versao 1.1 (Corrigido)*
 *Economiza+ MVP - Sprint 2*

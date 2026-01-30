@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Economiza+ is a financial behavior analysis and segmentation system for Brazilian middle-to-lower-income families (classes C and D). The project uses machine learning to identify spending patterns, segment users into financial profiles, and provide personalized saving recommendations.
 
-The project generates synthetic financial data based on Brazilian statistics (Serasa, CNC, IBGE, POF) and applies K-means clustering to identify 4 distinct user profiles ranging from "Endividados Severos" (-89% savings rate) to "Poupadores" (+25% savings rate).
+The project generates synthetic financial data based on Brazilian statistics (Serasa, CNC, IBGE, POF) and applies K-means clustering to identify 4 distinct user profiles ranging from "Endividados Severos" (-80% savings rate) to "Poupadores" (+26% savings rate).
 
 ## Academic Context
 
@@ -18,8 +18,8 @@ The project generates synthetic financial data based on Brazilian statistics (Se
 
 | Hypothesis | Description | Target | Result | Status |
 |------------|-------------|--------|--------|--------|
-| H1 | Economy recommendations generate real savings | 15-20% reduction | 8.11% (19.22% Cluster 0) | Partial |
-| H2 | K-means clustering identifies distinct profiles | Silhouette Score > 0.5 | 0.52 | Validated |
+| H1 | Economy recommendations generate real savings | 15-20% reduction | 8.60% (17.56% Cluster 2) | Partial |
+| H2 | K-means clustering identifies distinct profiles | Silhouette Score > 0.5 | 0.27 | Not validated |
 | H6 | Isolation Forest detects anomalous transactions | Precision > 0.85, Recall > 0.80 | P=47.3%, R=47.4% | Not validated |
 
 ## Sprint Structure
@@ -100,10 +100,10 @@ scripts/gerar_dataset_financeiro.py → data/raw/ → notebooks (processing) →
 5. `std_gasto` - Spending variability
 
 ### 4 Identified Clusters
-- Cluster 0: Endividados Severos (11.8%, -89% savings rate)
-- Cluster 1: Em Alerta (39.2%, -15% savings rate)
-- Cluster 2: Endividados Moderados (33.4%, -58% savings rate)
-- Cluster 3: Poupadores (15.6%, +25% savings rate)
+- Cluster 0: Endividados Moderados (17.2%, -37% savings rate)
+- Cluster 1: Em Alerta (45.6%, -25% savings rate)
+- Cluster 2: Endividados Severos (22.4%, -80% savings rate)
+- Cluster 3: Poupadores (14.8%, +26% savings rate)
 
 ## Models and Artifacts
 
@@ -165,9 +165,9 @@ print(resultado['anomalias']['total_anomalias'])  # e.g., 3
 
 | Cluster | Rule 1 | Rule 2 |
 |---------|--------|--------|
-| 0 - Endividados Severos | Cut Alimentacao_Fora 70% | Eliminate Vestuario 90% |
+| 0 - Endividados Moderados | Reduce Alimentacao_Fora 50% | Cut Vestuario 50% |
 | 1 - Em Alerta | Reduce Alimentacao_Fora 40% | Limit Lazer 35% |
-| 2 - Endividados Moderados | Reduce Alimentacao_Fora 50% | Cut Vestuario 50% |
+| 2 - Endividados Severos | Cut Alimentacao_Fora 70% | Eliminate Vestuario 90% |
 | 3 - Poupadores | Optimize Transporte 15% | Review Telecomunicacoes 20% |
 
 ## Data Conventions

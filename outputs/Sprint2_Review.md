@@ -15,8 +15,8 @@
 | Modelos treinados | 2 (Isolation Forest + Pipeline) |
 | Regras de recomendacao | 8 (2 por cluster) |
 | Usuarios analisados | 500 |
-| Economia mensal total projetada | R$ 135.972,17 |
-| Economia anual projetada | R$ 1.631.666,04 |
+| Economia mensal total projetada | R$ 144.912,93 |
+| Economia anual projetada | R$ 1.738.955,16 |
 
 ---
 
@@ -25,24 +25,24 @@
 ### H1: Recomendacoes Geram Economia Real
 
 **Target:** 15-20% de reducao de gastos
-**Resultado:** 8.11% de economia media (% da renda)
-**Status:** :x: **NAO VALIDADA** (parcialmente - Cluster 0 atingiu 19.22%)
+**Resultado:** 8.60% de economia media (% da renda)
+**Status:** :x: **NAO VALIDADA** (parcialmente - Cluster 2 atingiu 17.56%)
 
 #### Detalhamento por Cluster
 
 | Cluster | Economia Media | % da Renda | Status |
 |---------|----------------|------------|--------|
-| **Endividados Severos** | R$ 698,53 | 19.22% | :white_check_mark: Atingido |
-| **Em Alerta** | R$ 162,59 | 5.37% | :x: Abaixo |
-| **Endividados Moderados** | R$ 320,13 | 10.38% | :x: Abaixo |
-| **Poupadores** | R$ 120,90 | 1.72% | :x: Abaixo |
+| **Endividados Moderados** (C0) | R$ 354,69 | 11.41% | :x: Abaixo |
+| **Em Alerta** (C1) | R$ 160,42 | 5.38% | :x: Abaixo |
+| **Endividados Severos** (C2) | R$ 613,49 | 17.56% | :white_check_mark: Atingido |
+| **Poupadores** (C3) | R$ 123,29 | 1.72% | :x: Abaixo |
 
 #### Analise
 
-- **Cluster 0 (Endividados Severos)** atingiu o target com 19.22% de economia
-- Clusters 1, 2 e 3 ficaram abaixo do target minimo de 15%
-- Economia media geral de 8.11% insuficiente para validar H1 globalmente
-- Impacto financeiro total ainda significativo: R$ 135k/mes para 500 usuarios
+- **Cluster 2 (Endividados Severos)** atingiu o target com 17.56% de economia
+- Clusters 0, 1 e 3 ficaram abaixo do target minimo de 15%
+- Economia media geral de 8.60% insuficiente para validar H1 globalmente
+- Impacto financeiro total ainda significativo: R$ 145k/mes para 500 usuarios
 
 ---
 
@@ -187,18 +187,18 @@ resultado = pipeline.analisar_usuario(user_id, transacoes)
 
 | Metrica | Valor |
 |---------|-------|
-| Total Mensal | R$ 135.972,17 |
-| Total Anual | R$ 1.631.666,04 |
-| Media por Usuario | R$ 271,94/mes |
+| Total Mensal | R$ 144.912,93 |
+| Total Anual | R$ 1.738.955,16 |
+| Media por Usuario | R$ 289,83/mes |
 
 ### Melhoria na Taxa de Poupanca
 
 | Cluster | Taxa Atual | Taxa Projetada | Melhoria |
 |---------|------------|----------------|----------|
-| Endividados Severos | -88.6% | -81.7% | +6.9pp |
-| Em Alerta | -14.8% | -9.4% | +5.4pp |
-| Endividados Moderados | -57.7% | -48.3% | +9.4pp |
-| Poupadores | 25.4% | 27.1% | +1.7pp |
+| Endividados Moderados (C0) | -36.8% | -26.4% | +10.4pp |
+| Em Alerta (C1) | -24.6% | -19.3% | +5.3pp |
+| Endividados Severos (C2) | -79.7% | -69.2% | +10.5pp |
+| Poupadores (C3) | +26.0% | +27.8% | +1.7pp |
 
 ---
 
@@ -213,7 +213,7 @@ resultado = pipeline.analisar_usuario(user_id, transacoes)
 
 ### Desafios enfrentados
 
-1. **H1 parcialmente atingida:** Apenas Cluster 0 atingiu target
+1. **H1 parcialmente atingida:** Apenas Cluster 2 atingiu target
 2. **H6 nao atingida:** Anomalias sinteticas aleatorias dificultam deteccao
 3. **Ground truth sintetico:** Nao reflete padroes reais de anomalias
 
@@ -230,7 +230,7 @@ resultado = pipeline.analisar_usuario(user_id, transacoes)
 
 | Criterio | Target | Resultado | Status |
 |----------|--------|-----------|--------|
-| H1 Validada | 15-20% economia | 8.11% (19.22% Cluster 0) | :yellow_circle: Parcial |
+| H1 Validada | 15-20% economia | 8.60% (17.56% Cluster 2) | :yellow_circle: Parcial |
 | H6 Validada | Precision >0.85 | 47.3% | :x: Nao atingido |
 | H6 Validada | Recall >0.80 | 47.4% | :x: Nao atingido |
 | Pipeline Funcional | Sim | Sim | :white_check_mark: Atingido |
@@ -271,14 +271,14 @@ resultado = pipeline.analisar_usuario(user_id, transacoes)
 - :white_check_mark: 6 notebooks desenvolvidos e executados
 - :white_check_mark: Pipeline integrado funcional
 - :white_check_mark: Sistema de recomendacoes implementado
-- :yellow_circle: H1 parcialmente validada (Cluster 0 OK)
+- :yellow_circle: H1 parcialmente validada (Cluster 2 OK)
 - :x: H6 nao validada (necessita revisao do dataset)
 
 **Recomendacao:** Prosseguir para Sprint 3 focando no Dashboard e refinamento das hipoteses.
 
 ---
 
-**Documento atualizado em:** 27 de Janeiro de 2026
-**Versao:** 2.0 (Final)
+**Documento atualizado em:** 29 de Janeiro de 2026
+**Versao:** 2.1 (Corrigido)
 **Status:** Aprovado
 **Proximo:** Sprint 3 - Dashboard e Integracao

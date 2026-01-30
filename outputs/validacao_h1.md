@@ -11,8 +11,8 @@
 
 | Métrica | Target | Resultado | Status |
 |---------|--------|-----------|--------|
-| Economia média (% renda) | 15-20% | 8.11% | NÃO ATINGIDA |
-| Economia mediana (% renda) | 15-20% | 6.72% | - |
+| Economia média (% renda) | 15-20% | 8.60% | NÃO ATINGIDA |
+| Economia mediana (% renda) | 15-20% | 6.20% | - |
 
 ---
 
@@ -20,18 +20,18 @@
 
 | Cluster | Usuários | Economia Média (R$) | Economia Média (% Renda) |
 |---------|----------|---------------------|-------------------------|
-| Endividados Severos | 59 | R$ 698.53 | 19.22% |
-| Em Alerta | 196 | R$ 162.59 | 5.37% |
-| Endividados Moderados | 167 | R$ 320.13 | 10.38% |
-| Poupadores | 78 | R$ 120.90 | 1.72% |
+| Endividados Moderados | 86 | R$ 354.69 | 11.41% |
+| Em Alerta | 228 | R$ 160.42 | 5.38% |
+| Endividados Severos | 112 | R$ 613.49 | 17.56% |
+| Poupadores | 74 | R$ 123.29 | 1.72% |
 
 ---
 
 ## Impacto Total Projetado
 
-- **Economia mensal total (500 usuários):** R$ 135,972.17
-- **Economia anual total:** R$ 1,631,666.04
-- **Economia média por usuário:** R$ 271.94/mês
+- **Economia mensal total (500 usuários):** R$ 144,912.93
+- **Economia anual total:** R$ 1,738,955.16
+- **Economia média por usuário:** R$ 289.83/mês
 
 ---
 
@@ -39,10 +39,10 @@
 
 | Cluster | Taxa Atual | Taxa Projetada | Melhoria |
 |---------|------------|----------------|----------|
-| Endividados Severos | -88.6% | -81.7% | +6.9pp |
-| Em Alerta | -14.8% | -9.4% | +5.4pp |
-| Endividados Moderados | -57.7% | -48.3% | +9.4pp |
-| Poupadores | 25.4% | 27.1% | +1.7pp |
+| Endividados Moderados | -36.8% | -26.4% | +10.4pp |
+| Em Alerta | -24.6% | -19.3% | +5.3pp |
+| Endividados Severos | -79.7% | -69.2% | +10.5pp |
+| Poupadores | 26.0% | 27.8% | +1.7pp |
 
 ---
 

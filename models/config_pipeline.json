@@ -1,6 +1,6 @@
 {
   "versao": "1.0",
-  "data_criacao": "2026-01-27",
+  "data_criacao": "2026-01-29",
   "descricao": "Pipeline integrado Economiza+ MVP",
   "componentes": {
     "clustering": {

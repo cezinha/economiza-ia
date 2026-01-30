@@ -15,14 +15,14 @@
 
 | Metrica | Target | Resultado | Status |
 |---------|--------|-----------|--------|
-| Silhouette Score | > 0.5 | 0.2568 | NAO ATINGIDO |
-| Davies-Bouldin Index | < 1.0 | 1.1959 | NAO ATINGIDO |
+| Silhouette Score | > 0.5 | 0.2672 | NAO ATINGIDO |
+| Davies-Bouldin Index | < 1.0 | 1.1839 | NAO ATINGIDO |
 | Clusters interpretaveis | Sim | Sim | ATINGIDO |
 
 ### Analise
 
-- **Silhouette Score (0.26)**: Abaixo do target (0.5), indicando sobreposicao entre clusters
-- **Davies-Bouldin (1.20)**: Acima do target (1.0), confirmando clusters nao bem separados
+- **Silhouette Score (0.27)**: Abaixo do target (0.5), indicando sobreposicao entre clusters
+- **Davies-Bouldin (1.18)**: Acima do target (1.0), confirmando clusters nao bem separados
 - **Interpretabilidade**: Apesar das metricas, os 4 clusters sao claramente interpretaveis com perfis distintos de risco financeiro
 
 ### Decisao
@@ -43,10 +43,10 @@ Para o MVP, **aceitamos os resultados** pois:
 
 ## Perfis Identificados
 
-- **Endividados Severos**: 59 usuarios (-88.6% poupanca)
-- **Endividados Moderados**: 167 usuarios (-57.7% poupanca)
-- **Em Alerta**: 196 usuarios (-14.8% poupanca)
-- **Poupadores**: 78 usuarios (+25.4% poupanca)
+- **Endividados Severos**: 112 usuarios (-79.7% poupanca)
+- **Endividados Moderados**: 86 usuarios (-36.8% poupanca)
+- **Em Alerta**: 228 usuarios (-24.6% poupanca)
+- **Poupadores**: 74 usuarios (+26.0% poupanca)
 
 ## Top 3 Categorias para Economia
 

@@ -1,6 +1,6 @@
 # Validação da Hipótese H6 - Detecção de Anomalias
 
-**Data:** 27 de January de 2026
+**Data:** 29 de January de 2026
 **Sprint:** 2 - Dia 11
 
 ---

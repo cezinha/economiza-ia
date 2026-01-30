@@ -5,26 +5,26 @@
   "total_regras": 8,
   "clusters": {
     "0": {
-      "nome": "Endividados Severos",
-      "prioridade": "CRÍTICA",
+      "nome": "Endividados Moderados",
+      "prioridade": "ALTA",
       "regras": [
         {
           "id": "R0_1",
           "categoria": "Alimentacao_Fora",
           "acao": "reducao",
-          "percentual": 0.7,
-          "titulo": "Cortar refeições fora de casa",
-          "mensagem": "Reduza drasticamente refeições fora de casa. Priorize marmitas e cozinhar em casa.",
-          "dica": "Planeje cardápio semanal e faça compras com lista"
+          "percentual": 0.5,
+          "titulo": "Reduzir significativamente refeições fora",
+          "mensagem": "Reduza refeições fora de casa pela metade.",
+          "dica": "Cozinhe em maior quantidade no fim de semana para a semana toda"
         },
         {
           "id": "R0_2",
           "categoria": "Vestuario",
-          "acao": "eliminacao",
-          "percentual": 0.9,
-          "titulo": "Suspender compras de vestuário",
-          "mensagem": "Suspenda compras de roupas não essenciais por 3 meses.",
-          "dica": "Revise o guarda-roupa e conserte peças antes de comprar novas"
+          "acao": "reducao",
+          "percentual": 0.5,
+          "titulo": "Cortar gastos com vestuário",
+          "mensagem": "Reduza compras de roupas pela metade.",
+          "dica": "Compre apenas itens essenciais e aproveite promoções"
         }
       ]
     },
@@ -53,26 +53,26 @@
       ]
     },
     "2": {
-      "nome": "Endividados Moderados",
-      "prioridade": "ALTA",
+      "nome": "Endividados Severos",
+      "prioridade": "CRÍTICA",
       "regras": [
         {
           "id": "R2_1",
           "categoria": "Alimentacao_Fora",
           "acao": "reducao",
-          "percentual": 0.5,
-          "titulo": "Reduzir significativamente refeições fora",
-          "mensagem": "Reduza refeições fora de casa pela metade.",
-          "dica": "Cozinhe em maior quantidade no fim de semana para a semana toda"
+          "percentual": 0.7,
+          "titulo": "Cortar refeições fora de casa",
+          "mensagem": "Reduza drasticamente refeições fora de casa. Priorize marmitas e cozinhar em casa.",
+          "dica": "Planeje cardápio semanal e faça compras com lista"
         },
         {
           "id": "R2_2",
           "categoria": "Vestuario",
-          "acao": "reducao",
-          "percentual": 0.5,
-          "titulo": "Cortar gastos com vestuário",
-          "mensagem": "Reduza compras de roupas pela metade.",
-          "dica": "Compre apenas itens essenciais e aproveite promoções"
+          "acao": "eliminacao",
+          "percentual": 0.9,
+          "titulo": "Suspender compras de vestuário",
+          "mensagem": "Suspenda compras de roupas não essenciais por 3 meses.",
+          "dica": "Revise o guarda-roupa e conserte peças antes de comprar novas"
         }
       ]
     },

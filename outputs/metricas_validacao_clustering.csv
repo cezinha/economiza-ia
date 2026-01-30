@@ -1,2 +1,2 @@
 k_clusters,silhouette_score,davies_bouldin_index,checkpoint_validado,pca_variance_explained,cluster_sizes
-4,0.25682223549459515,1.1958568789829904,False,0.8268481393445697,"{0: 59, 1: 196, 2: 167, 3: 78}"
+4,0.2671600369588966,1.1838913428211195,False,0.7334101021434664,"{0: 86, 1: 228, 2: 112, 3: 74}"

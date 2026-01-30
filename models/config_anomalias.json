@@ -1,6 +1,6 @@
 {
   "versao": "1.1",
-  "data_validacao": "2026-01-27",
+  "data_validacao": "2026-01-29",
   "modelo": "IsolationForest",
   "parametros": {
     "contamination": 0.05,
