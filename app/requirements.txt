@@ -1,0 +1,13 @@
+# Economiza+ MVP Dashboard - Requirements
+# Instalar com: pip install -r requirements.txt
+
+# Dashboard
+streamlit>=1.28.0
+plotly>=5.18.0
+
+# Data processing (provavelmente ja instalados)
+pandas>=2.0.0
+numpy>=1.24.0
+
+# ML (provavelmente ja instalados)
+scikit-learn>=1.3.0
