@@ -34,7 +34,7 @@ Implementar sistema de recomendacoes personalizadas por perfil financeiro e dete
 | Metrica | Target | Resultado | Status |
 |---------|--------|-----------|--------|
 | Economia media (% renda) | 15-20% | **8.60%** | Parcial |
-| Economia mediana (% renda) | 15-20% | 6.72% | Abaixo |
+| Economia mediana (% renda) | 15-20% | 6.20% | Abaixo |
 | Cluster 2 especifico | 15-20% | **17.56%** | OK |
 
 ### Economia por Cluster (Detalhado)
