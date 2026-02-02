@@ -64,7 +64,7 @@ The project generates synthetic financial data based on Brazilian statistics (Se
 - **Sprint 2** (Days 8-14): Recommendation system, Anomaly detection - COMPLETED
 - **Sprint 3** (Days 15-21): Dashboard (Streamlit), Integration, Documentation - IN PROGRESS
   - Day 15: Dashboard structure and pages - COMPLETED
-  - Day 16: Dashboard enhancements - IN PROGRESS
+  - Day 16: Bug fixes (cluster names), dashboard testing - COMPLETED
 
 ### Sprint 3 Roadmap
 
@@ -414,6 +414,7 @@ resumo = pipeline.get_resumo_geral()
 | Modular pipeline | Facilitates iteration and debugging |
 | Aggressive rules for critical profiles | Cluster 2 achieved 17.56% (within target) |
 | Ground truth matters | H6 failed due to random anomaly generation, not model |
+| Consistent naming across notebooks | Bug in notebook 11 propagated to pipeline and demo images |
 
 ### Technical Decisions Validated
 
@@ -426,6 +427,44 @@ resumo = pipeline.get_resumo_geral()
 | 2 rules per cluster | More rules | Validated - focus and simplicity |
 | Rule-based recommendations | ML-based | Validated - interpretable and auditable |
 | Global Isolation Forest | Per-category models | Partial - dataset issue |
+
+### Bug Fixes (Sprint 3 - Day 16)
+
+**Issue:** Cluster names were swapped in notebooks 11 and 12
+- Cluster 0 was incorrectly labeled as "Endividados Severos" (should be "Moderados")
+- Cluster 2 was incorrectly labeled as "Endividados Moderados" (should be "Severos")
+
+**Root Cause:** The `CLUSTER_NAMES` dictionary in `11_Pipeline_Integrado.ipynb` had clusters 0 and 2 swapped, which propagated to:
+- `models/pipeline_completo.pkl` (saved with wrong names)
+- `12_Demonstracao.ipynb` (loaded wrong names from pipeline)
+- Demo images (`outputs/demo_cluster_0.png`, `outputs/demo_cluster_2.png`)
+
+**Fix Applied:**
+1. Corrected `CLUSTER_NAMES` in notebook 11:
+   ```python
+   CLUSTER_NAMES = {
+       0: "Endividados Moderados",  # -37% savings rate, HIGH priority
+       1: "Em Alerta",              # -25% savings rate, MODERATE priority
+       2: "Endividados Severos",    # -80% savings rate, CRITICAL priority
+       3: "Poupadores"              # +26% savings rate, LOW priority
+   }
+   ```
+2. Re-executed notebook 11 (regenerated `pipeline_completo.pkl`)
+3. Re-executed notebook 12 (regenerated demo images)
+4. Fixed static summary text in notebook 12 (cell 30) - the "PERFIS DEMONSTRADOS" section had hardcoded cluster names that were still swapped
+
+**Files Updated:**
+- `notebooks/11_Pipeline_Integrado.ipynb`
+- `notebooks/12_Demonstracao.ipynb` (code + static summary text)
+- `models/pipeline_completo.pkl`
+- `outputs/demo_cluster_0.png`
+- `outputs/demo_cluster_2.png`
+- `outputs/demo_comparativo_perfis.png`
+
+**Verification:**
+- Notebooks 05, 06, 07, 08 were verified and had correct cluster names
+- Sprint 2 documentation (Sprint2_Resumo.md, Sprint2_Resumo_Executivo.md, Sprint2_Relatorio.md) verified - all correct
+- All notebooks and documentation now consistent with correct cluster naming
 
 ## Documentation
 

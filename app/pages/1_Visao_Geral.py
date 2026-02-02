@@ -9,8 +9,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from utils.config import CLUSTER_NAMES, CLUSTER_COLORS
-from utils.data_loader import load_usuarios_clustered, load_economia_projetada
+from utils.config import CLUSTER_NAMES, CLUSTER_COLORS, CLUSTER_PRIORITIES
+from utils.data_loader import load_usuarios_clustered, load_economia_projetada, load_recomendacoes_regras
 from utils.pipeline import get_pipeline
 from components.charts import cluster_pie_chart, economia_bar_chart
 
@@ -77,6 +77,67 @@ with col_right:
         'economia_total': 'sum'
     }).reset_index()
     economia_bar_chart(economia_cluster.set_index('cluster'))
+
+st.markdown("---")
+
+# Top Recomendações por Cluster
+st.subheader("💡 Top Recomendações por Perfil")
+
+try:
+    regras = load_recomendacoes_regras()
+    clusters_regras = regras.get('clusters', {})
+
+    col1, col2 = st.columns(2)
+
+    for idx, cluster in enumerate(range(4)):
+        cluster_key = str(cluster)
+        nome = CLUSTER_NAMES[cluster]
+        color = CLUSTER_COLORS[cluster]
+        prioridade = CLUSTER_PRIORITIES[cluster]
+
+        if cluster_key in clusters_regras:
+            cluster_info = clusters_regras[cluster_key]
+            regras_cluster = cluster_info.get('regras', [])
+
+            with col1 if idx % 2 == 0 else col2:
+                st.markdown(f"""
+                <div style="
+                    background: {color}15;
+                    border-left: 4px solid {color};
+                    padding: 1rem;
+                    border-radius: 0.5rem;
+                    margin-bottom: 1rem;
+                ">
+                    <h4 style="margin: 0; color: {color};">{nome}</h4>
+                    <p style="margin: 0.3rem 0; font-size: 0.85rem; color: #666;">
+                        Prioridade: <strong>{prioridade}</strong>
+                    </p>
+                </div>
+                """, unsafe_allow_html=True)
+
+                for regra in regras_cluster[:2]:
+                    categoria = regra.get('categoria', '')
+                    percentual = regra.get('percentual', 0)
+                    pct_display = f"{int(percentual * 100)}%" if percentual < 1 else f"{int(percentual)}%"
+                    titulo = regra.get('titulo', '')
+
+                    st.markdown(f"""
+                    <div style="
+                        background: #f8f9fa;
+                        padding: 0.5rem 1rem;
+                        border-radius: 0.3rem;
+                        margin-bottom: 0.5rem;
+                        font-size: 0.9rem;
+                    ">
+                        <strong>{categoria}</strong>: Reduzir {pct_display}<br>
+                        <span style="color: #666;">{titulo}</span>
+                    </div>
+                    """, unsafe_allow_html=True)
+
+                st.markdown("<br>", unsafe_allow_html=True)
+
+except Exception as e:
+    st.warning(f"Não foi possível carregar recomendações: {e}")
 
 st.markdown("---")
 
