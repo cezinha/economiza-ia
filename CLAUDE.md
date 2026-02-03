@@ -21,22 +21,25 @@ The project generates synthetic financial data based on Brazilian statistics (Se
 | Users analyzed | 500 |
 | Transactions processed | 191,231 |
 | Clusters identified | 4 |
-| Users in financial risk | 386 (77.2%) |
+| Users in financial risk | 426 (85.2%) |
 | Average savings rate | -31.6% |
-| Projected monthly savings | R$ 144,912 |
-| Projected annual savings | R$ 1.74M |
+| Projected monthly savings | R$ 188,746 |
+| Projected annual savings | R$ 2.26M |
 | Pipeline throughput | ~20 users/second |
 
 ## Hypotheses and Validation Results
 
 ### H1: Economy Recommendations Generate Real Savings
-| Metric | Target | Result | Status |
-|--------|--------|--------|--------|
-| Average economy (% income) | 15-20% | 8.60% | Below target |
-| Cluster 2 (critical) economy | 15-20% | **17.56%** | Achieved |
-| Median economy | 15-20% | 6.20% | Below target |
 
-**Conclusion**: Partially validated. Aggressive rules work effectively for critical profiles (Cluster 2 - Endividados Severos).
+**After Day 17 Refinement (v1.1 rules):**
+| Metric | Target | Before | After | Status |
+|--------|--------|--------|-------|--------|
+| Cluster 0 (Moderados) | 15-20% | 10.98% | **15.97%** | ✅ Achieved |
+| Cluster 1 (Em Alerta) | 15-20% | 5.19% | 10.03% | ⚠️ Improved |
+| Cluster 2 (Severos) | 15-20% | 17.41% | **17.56%** | ✅ Achieved |
+| Average economy | 15-20% | 8.60% | **9.83%** | Improved |
+
+**Conclusion**: 2 of 3 target clusters now achieve the 15-20% goal. Cluster 1 (Em Alerta) requires complementary approach (financial education) beyond simple cuts - documented as known limitation.
 
 ### H2: K-means Clustering Identifies Distinct Profiles
 | Metric | Target | Result | Status |
@@ -65,6 +68,7 @@ The project generates synthetic financial data based on Brazilian statistics (Se
 - **Sprint 3** (Days 15-21): Dashboard (Streamlit), Integration, Documentation - IN PROGRESS
   - Day 15: Dashboard structure and pages - COMPLETED
   - Day 16: Bug fixes (cluster names), dashboard testing - COMPLETED
+  - Day 17: H1 refinement (rules v1.1), economy recalculation - COMPLETED
 
 ### Sprint 3 Roadmap
 
@@ -106,7 +110,7 @@ The project generates synthetic financial data based on Brazilian statistics (Se
 - **Clustering**: K-means (not DBSCAN)
 - **Normalization**: StandardScaler
 - **Features**: Exactly 5 clustering features
-- **Recommendations**: 2 rule-based recommendations per cluster
+- **Recommendations**: 2-3 rule-based recommendations per cluster (v1.1: Cluster 1 has 3 rules)
 - **Anomaly Detection**: Global Isolation Forest (not per-category)
 
 ## Commands
@@ -149,6 +153,9 @@ Execute notebooks sequentially in Jupyter:
 11. `notebooks/11_Pipeline_Integrado.ipynb` - End-to-end pipeline
 12. `notebooks/12_Demonstracao.ipynb` - System demonstration
 
+**Sprint 3:**
+13. `notebooks/13_Refinamento_H1.ipynb` - H1 hypothesis refinement (Day 17)
+
 ## Architecture
 
 ### Data Flow
@@ -162,7 +169,7 @@ scripts/gerar_dataset_financeiro.py → data/raw/ → notebooks (processing) →
 - `models/` - Trained models and configurations
 - `outputs/` - Visualizations and documentation
 - `app/` - Streamlit dashboard application (Sprint 3)
-- `notebooks/` - Jupyter notebooks (12 total)
+- `notebooks/` - Jupyter notebooks (13 total)
 - `scripts/` - Data generation scripts
 
 ### Dataset Schema
@@ -189,10 +196,10 @@ scripts/gerar_dataset_financeiro.py → data/raw/ → notebooks (processing) →
 
 ### 4 Identified Clusters
 
-| Cluster | Name | N | % | Savings Rate | Risk Level | Monthly Economy |
-|---------|------|---|---|--------------|------------|-----------------|
-| 0 | Endividados Moderados | 86 | 17.2% | -36.8% | HIGH | R$ 354.69 |
-| 1 | Em Alerta | 228 | 45.6% | -24.6% | MODERATE | R$ 160.42 |
+| Cluster | Name | N | % | Savings Rate | Risk Level | Monthly Economy (v1.1) |
+|---------|------|---|---|--------------|------------|------------------------|
+| 0 | Endividados Moderados | 86 | 17.2% | -36.8% | HIGH | R$ 496.56 |
+| 1 | Em Alerta | 228 | 45.6% | -24.6% | MODERATE | R$ 299.15 |
 | 2 | Endividados Severos | 112 | 22.4% | -79.7% | CRITICAL | R$ 613.49 |
 | 3 | Poupadores | 74 | 14.8% | +26.0% | LOW | R$ 123.29 |
 
@@ -209,7 +216,7 @@ scripts/gerar_dataset_financeiro.py → data/raw/ → notebooks (processing) →
 - `models/scaler.pkl` - StandardScaler for clustering features
 
 ### Sprint 2 Models
-- `models/recomendacoes_regras.json` - 8 recommendation rules (2 per cluster)
+- `models/recomendacoes_regras.json` - 9 recommendation rules (v1.1: 2-3 per cluster)
 - `models/isolation_forest.pkl` - Anomaly detector
 - `models/scaler_anomalias.pkl` - Scaler for anomaly features
 - `models/stats_categoria_anomalias.csv` - Category statistics
@@ -289,14 +296,14 @@ cluster_names = pipeline_data['configuracoes']['cluster_names']
 }
 ```
 
-## Recommendation Rules Summary
+## Recommendation Rules Summary (v1.1 - Day 17 Refinement)
 
-| Cluster | Priority | Rule 1 | Rule 2 |
-|---------|----------|--------|--------|
-| 0 - Endividados Moderados | HIGH | Reduce Alimentacao_Fora 50% | Cut Vestuario 50% |
-| 1 - Em Alerta | MODERATE | Reduce Alimentacao_Fora 40% | Limit Lazer 35% |
-| 2 - Endividados Severos | CRITICAL | Cut Alimentacao_Fora 70% | Eliminate Vestuario 90% |
-| 3 - Poupadores | LOW | Optimize Transporte 15% | Review Telecomunicacoes 20% |
+| Cluster | Priority | Rule 1 | Rule 2 | Rule 3 |
+|---------|----------|--------|--------|--------|
+| 0 - Endividados Moderados | HIGH | Cut Alimentacao_Fora **70%** | Cut Vestuario **70%** | - |
+| 1 - Em Alerta | MODERATE | Reduce Alimentacao_Fora **60%** | Cut Lazer **50%** | **Reduce Vestuario 40%** |
+| 2 - Endividados Severos | CRITICAL | Cut Alimentacao_Fora 70% | Eliminate Vestuario 90% | - |
+| 3 - Poupadores | LOW | Optimize Transporte 15% | Review Telecomunicacoes 20% | - |
 
 ### Top 3 Categories for Economy (Non-Essential)
 
@@ -306,18 +313,18 @@ cluster_names = pipeline_data['configuracoes']['cluster_names']
 | 2 | Vestuario | R$ 197.60 | 40-60% | R$ 79-119/month |
 | 3 | Lazer | R$ 154.78 | 30-50% | R$ 46-77/month |
 
-### Projected Savings Impact
+### Projected Savings Impact (v1.1)
 
 | Period | Amount |
 |--------|--------|
-| Monthly (500 users) | R$ 144,912.93 |
-| Quarterly | R$ 434,739 |
-| Annual | R$ 1,738,955 |
+| Monthly (500 users) | R$ 188,746 |
+| Quarterly | R$ 566,237 |
+| Annual | R$ 2,264,948 |
 
 If 50% of users follow recommendations:
-- Real annual savings: R$ 869,478
+- Real annual savings: R$ 1,132,474
 - Users impacted: 250
-- Average per user: R$ 3,478/year
+- Average per user: R$ 4,530/year
 
 ## Data Conventions
 
@@ -415,6 +422,8 @@ resumo = pipeline.get_resumo_geral()
 | Aggressive rules for critical profiles | Cluster 2 achieved 17.56% (within target) |
 | Ground truth matters | H6 failed due to random anomaly generation, not model |
 | Consistent naming across notebooks | Bug in notebook 11 propagated to pipeline and demo images |
+| Iterative refinement works | H1 refinement improved economy from 8.6% to 9.8% average |
+| Some profiles need different approaches | Cluster 1 requires financial education beyond cuts |
 
 ### Technical Decisions Validated
 
@@ -424,7 +433,7 @@ resumo = pipeline.get_resumo_geral()
 | StandardScaler | MinMaxScaler, RobustScaler | Validated - adequate scale |
 | 5 features | 10+ features | Validated - sufficient |
 | K=4 | K=3 or K=5 | Validated - ideal balance |
-| 2 rules per cluster | More rules | Validated - focus and simplicity |
+| 2-3 rules per cluster | More rules | Validated - focus and simplicity (v1.1: added 3rd rule for Cluster 1) |
 | Rule-based recommendations | ML-based | Validated - interpretable and auditable |
 | Global Isolation Forest | Per-category models | Partial - dataset issue |
 
@@ -529,3 +538,6 @@ resumo = pipeline.get_resumo_geral()
 - `outputs/demo_cluster_2.png` - Dashboard Endividados Severos
 - `outputs/demo_cluster_3.png` - Dashboard Poupadores
 - `outputs/demo_comparativo_perfis.png` - Profile comparison
+
+**Sprint 3 - H1 Refinement (1 visualization):**
+- `outputs/refinamento_h1_comparativo.png` - Before/after comparison chart
