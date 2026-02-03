@@ -21,13 +21,24 @@ st.markdown("Análise comparativa dos 4 perfis financeiros identificados")
 
 st.markdown("---")
 
-# Carregar dados
-try:
-    usuarios = load_usuarios_clustered()
-    economia = load_economia_projetada()
-except Exception as e:
-    st.error(f"Erro ao carregar dados: {e}")
-    st.stop()
+# Carregar dados com feedback visual
+with st.spinner("Carregando dados para comparativo..."):
+    try:
+        usuarios = load_usuarios_clustered()
+        economia = load_economia_projetada()
+
+        if usuarios.empty:
+            st.error("Dados de usuários não disponíveis.")
+            st.info("Verifique a página de Diagnóstico para mais detalhes.")
+            st.stop()
+
+        if economia.empty:
+            st.warning("Dados de economia não disponíveis. Alguns gráficos podem não ser exibidos.")
+
+    except Exception as e:
+        st.error(f"Erro ao carregar dados: {e}")
+        st.info("Verifique a página de Diagnóstico para verificar o status dos arquivos.")
+        st.stop()
 
 # Calcular estatísticas por cluster
 stats = usuarios.groupby('cluster').agg({

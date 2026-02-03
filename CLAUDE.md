@@ -65,10 +65,14 @@ The project generates synthetic financial data based on Brazilian statistics (Se
 
 - **Sprint 1** (Days 1-7): EDA, Feature Engineering, Clustering - COMPLETED
 - **Sprint 2** (Days 8-14): Recommendation system, Anomaly detection - COMPLETED
-- **Sprint 3** (Days 15-21): Dashboard (Streamlit), Integration, Documentation - IN PROGRESS
+- **Sprint 3** (Days 15-21): Dashboard (Streamlit), Integration, Documentation - IN PROGRESS (57%)
   - Day 15: Dashboard structure and pages - COMPLETED
   - Day 16: Bug fixes (cluster names), dashboard testing - COMPLETED
   - Day 17: H1 refinement (rules v1.1), economy recalculation - COMPLETED
+  - Day 18: Optimization and error handling - COMPLETED
+  - Day 19: Documentation (README, presentation) - NEXT
+  - Day 20: Documentation (final report) - PENDING
+  - Day 21: Final review and delivery - PENDING
 
 ### Sprint 3 Roadmap
 
@@ -91,11 +95,12 @@ The project generates synthetic financial data based on Brazilian statistics (Se
 
 | Hash | Message | Description |
 |------|---------|-------------|
+| `83b7492` | update CLAUDE.md and Sprint3_Planejamento with Day 17 metrics | Day 17 documentation |
+| `75917e6` | added day 16, 17 | Days 16-17 implementation |
+| `2db44b5` | added top recommendations, fix bug | H1 refinement v1.1 |
+| `902f034` | fix issue divergence between Severos and Moderados | Cluster names fix |
 | `25a2de0` | added Day 15 | Sprint 3 Dashboard implementation |
-| `a352a7a` | updated version with fixes | Bug fixes (cluster names) |
 | `a7db2d9` | Sprint 2 | Sprint 2 finalization |
-| `286ef55` | sprint 2 dias 8, 9, 10 | Days 8-10 development |
-| `34d976e` | updated clusters names | Fixed cluster naming bug |
 | `7f62a10` | sprint days 5-7 | Sprint 1 interpretation and documentation |
 
 ## Constraints and Pre-defined Decisions
@@ -262,6 +267,14 @@ scripts/gerar_dataset_financeiro.py → data/raw/ → notebooks (processing) →
 
 **Total Sprint 2:** 7,647 lines of code
 
+### Sprint 3 Notebooks (1 executed so far)
+
+| # | Notebook | Day | Objective |
+|---|----------|-----|-----------|
+| 13 | 13_Refinamento_H1.ipynb | 17 | H1 hypothesis refinement (rules v1.0 → v1.1) |
+
+**Sprint 3 Code:** Dashboard app (see `app/` directory)
+
 ## Pipeline Usage
 
 ### Load and Use Pipeline
@@ -359,7 +372,8 @@ app/
 │   ├── 0_Home.py             # Home page
 │   ├── 1_Visao_Geral.py      # Overview (cluster distribution, metrics)
 │   ├── 2_Analise_Usuario.py  # Individual user analysis
-│   └── 3_Comparativo.py      # Profile comparison (radar, tables)
+│   ├── 3_Comparativo.py      # Profile comparison (radar, tables)
+│   └── 4_Diagnostico.py      # System health check (Day 18)
 ├── components/
 │   ├── __init__.py
 │   ├── cards.py              # Metric cards (profile, recommendation, anomaly)
@@ -368,8 +382,8 @@ app/
 └── utils/
     ├── __init__.py
     ├── config.py             # App configuration and constants
-    ├── data_loader.py        # Data loading utilities
-    └── pipeline.py           # Pipeline wrapper for Streamlit
+    ├── data_loader.py        # Data loading with error handling (Day 18)
+    └── pipeline.py           # Pipeline wrapper with validation (Day 18)
 ```
 
 ### Run Dashboard
@@ -384,6 +398,7 @@ streamlit run app.py
 2. **Visão Geral**: Cluster distribution (pie), economy by cluster (bar), detailed stats per cluster
 3. **Análise de Usuário**: User selection, profile card, financial metrics, recommendations with economy, anomaly alerts, financial health gauge
 4. **Comparativo**: Renda vs Gasto (grouped bar), savings rate by profile, economy projection, radar chart, comparison table
+5. **Diagnóstico** (Day 18): System health check, file status, error diagnostics, fix instructions
 
 ### Using the Dashboard
 ```python
@@ -424,6 +439,8 @@ resumo = pipeline.get_resumo_geral()
 | Consistent naming across notebooks | Bug in notebook 11 propagated to pipeline and demo images |
 | Iterative refinement works | H1 refinement improved economy from 8.6% to 9.8% average |
 | Some profiles need different approaches | Cluster 1 requires financial education beyond cuts |
+| Error handling is essential | Day 18 added robust error handling for better UX |
+| Diagnostic tools save time | System health page helps identify issues quickly |
 
 ### Technical Decisions Validated
 

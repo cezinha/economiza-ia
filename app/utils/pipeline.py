@@ -1,36 +1,74 @@
 """
 Wrapper do Pipeline Economiza+ MVP para uso no Streamlit
+Com tratamento de erros robusto (Day 18)
 """
 
 import pandas as pd
 import numpy as np
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Any
 import pickle
+import streamlit as st
 
 from .data_loader import (
     load_transacoes,
     load_usuarios_clustered,
     load_economia_projetada,
-    load_recomendacoes_regras
+    load_recomendacoes_regras,
+    DataLoadError,
+    check_system_health
 )
 from .config import CLUSTER_NAMES, CLUSTER_PRIORITIES, ISOLATION_FOREST_FILE
+
+
+class PipelineError(Exception):
+    """Excecao customizada para erros do pipeline."""
+    pass
 
 
 class PipelineWrapper:
     """Wrapper para facilitar uso do pipeline no Streamlit."""
 
     def __init__(self):
-        self.transacoes = load_transacoes()
-        self.usuarios_clustered = load_usuarios_clustered()
-        self.economia_projetada = load_economia_projetada()
-        self.regras = load_recomendacoes_regras()
+        self._initialized = False
+        self._init_error = None
 
-        # Tentar carregar isolation forest (unico que funciona)
         try:
-            with open(ISOLATION_FOREST_FILE, 'rb') as f:
-                self.isolation_forest = pickle.load(f)
+            self.transacoes = load_transacoes()
+            self.usuarios_clustered = load_usuarios_clustered()
+            self.economia_projetada = load_economia_projetada()
+            self.regras = load_recomendacoes_regras()
+            self._initialized = True
+        except DataLoadError as e:
+            self._init_error = str(e)
+            # Criar DataFrames vazios como fallback
+            self.transacoes = pd.DataFrame()
+            self.usuarios_clustered = pd.DataFrame()
+            self.economia_projetada = pd.DataFrame()
+            self.regras = {}
+
+        # Tentar carregar isolation forest (opcional)
+        try:
+            if ISOLATION_FOREST_FILE.exists():
+                with open(ISOLATION_FOREST_FILE, 'rb') as f:
+                    self.isolation_forest = pickle.load(f)
+            else:
+                self.isolation_forest = None
         except Exception:
             self.isolation_forest = None
+
+    @property
+    def is_ready(self) -> bool:
+        """Verifica se o pipeline esta pronto para uso."""
+        return self._initialized
+
+    @property
+    def init_error(self) -> Optional[str]:
+        """Retorna erro de inicializacao, se houver."""
+        return self._init_error
+
+    def check_health(self) -> Dict[str, Any]:
+        """Verifica saude do pipeline."""
+        return check_system_health()
 
     def analisar_usuario(self, user_id: str) -> Dict:
         """
@@ -42,13 +80,37 @@ class PipelineWrapper:
         Returns:
             Dict com perfil, financeiro, recomendacoes, economia e anomalias
         """
+        # Verificar se pipeline esta inicializado
+        if not self._initialized:
+            return {
+                'erro': f'Pipeline nao inicializado: {self._init_error}',
+                'erro_tipo': 'init_error'
+            }
+
+        # Validar user_id
+        if not user_id or not isinstance(user_id, str):
+            return {
+                'erro': 'ID de usuario invalido',
+                'erro_tipo': 'validation_error'
+            }
+
+        # Verificar se DataFrame de usuarios esta vazio
+        if self.usuarios_clustered.empty:
+            return {
+                'erro': 'Dados de usuarios nao carregados',
+                'erro_tipo': 'data_error'
+            }
+
         # Verificar se usuario existe
         user_data = self.usuarios_clustered[
             self.usuarios_clustered['user_id'] == user_id
         ]
 
         if len(user_data) == 0:
-            return {'erro': f'Usuario {user_id} nao encontrado'}
+            return {
+                'erro': f'Usuario {user_id} nao encontrado',
+                'erro_tipo': 'not_found'
+            }
 
         user_row = user_data.iloc[0]
         cluster = int(user_row['cluster'])
@@ -181,20 +243,37 @@ class PipelineWrapper:
 
     def get_resumo_geral(self) -> Dict:
         """Retorna resumo geral do sistema."""
+        # Verificar se dados estao carregados
+        if self.usuarios_clustered.empty:
+            return {
+                'total_usuarios': 0,
+                'distribuicao_clusters': {},
+                'economia_mensal_total': 0,
+                'economia_media_usuario': 0,
+                'economia_anual_total': 0,
+                'usuarios_em_risco': 0,
+                'pct_usuarios_risco': 0,
+                'erro': 'Dados nao carregados'
+            }
+
         total_usuarios = len(self.usuarios_clustered)
 
         # Distribuicao por cluster
         distribuicao = self.usuarios_clustered['cluster'].value_counts().sort_index()
 
         # Economia total
-        economia_total = self.economia_projetada['economia_total'].sum()
-        economia_media = self.economia_projetada['economia_total'].mean()
+        if not self.economia_projetada.empty and 'economia_total' in self.economia_projetada.columns:
+            economia_total = self.economia_projetada['economia_total'].sum()
+            economia_media = self.economia_projetada['economia_total'].mean()
+        else:
+            economia_total = 0
+            economia_media = 0
 
         # Usuarios em risco (clusters 0, 1, 2)
         usuarios_risco = len(self.usuarios_clustered[
             self.usuarios_clustered['cluster'].isin([0, 1, 2])
         ])
-        pct_risco = (usuarios_risco / total_usuarios) * 100
+        pct_risco = (usuarios_risco / total_usuarios) * 100 if total_usuarios > 0 else 0
 
         return {
             'total_usuarios': total_usuarios,

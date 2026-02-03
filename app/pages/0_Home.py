@@ -60,16 +60,32 @@ def main():
         unsafe_allow_html=True
     )
 
-    # Carregar dados
-    try:
-        pipeline = get_pipeline()
-        resumo = pipeline.get_resumo_geral()
-        usuarios = load_usuarios_clustered()
-        economia = load_economia_projetada()
-    except Exception as e:
-        st.error(f"Erro ao carregar dados: {e}")
-        st.info("Verifique se os arquivos de dados e modelos estão nos diretórios corretos.")
-        st.stop()
+    # Carregar dados com feedback visual
+    with st.spinner("Carregando dados do sistema..."):
+        try:
+            pipeline = get_pipeline()
+
+            # Verificar se pipeline esta pronto
+            if not pipeline.is_ready:
+                st.error(f"Erro ao inicializar o sistema: {pipeline.init_error}")
+                st.info("👉 Acesse a página **Diagnóstico** no menu para verificar o status dos arquivos.")
+                st.stop()
+
+            resumo = pipeline.get_resumo_geral()
+
+            # Verificar se resumo tem dados
+            if resumo.get('total_usuarios', 0) == 0:
+                st.warning("Nenhum dado de usuário encontrado.")
+                st.info("Execute os notebooks de processamento para gerar os dados.")
+                st.stop()
+
+            usuarios = load_usuarios_clustered()
+            economia = load_economia_projetada()
+
+        except Exception as e:
+            st.error(f"Erro ao carregar dados: {e}")
+            st.info("👉 Acesse a página **Diagnóstico** no menu para verificar o status dos arquivos.")
+            st.stop()
 
     # Se usuário selecionado e botão clicado, mostrar análise individual
     if selected_user and analyze_clicked:

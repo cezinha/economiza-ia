@@ -19,15 +19,29 @@ st.markdown("Panorama completo do sistema Economiza+ MVP")
 
 st.markdown("---")
 
-# Carregar dados
-try:
-    pipeline = get_pipeline()
-    resumo = pipeline.get_resumo_geral()
-    usuarios = load_usuarios_clustered()
-    economia = load_economia_projetada()
-except Exception as e:
-    st.error(f"Erro ao carregar dados: {e}")
-    st.stop()
+# Carregar dados com feedback visual
+with st.spinner("Carregando dados..."):
+    try:
+        pipeline = get_pipeline()
+
+        # Verificar se pipeline esta pronto
+        if not pipeline.is_ready:
+            st.error(f"Erro ao inicializar: {pipeline.init_error}")
+            st.info("👉 Acesse a página **Diagnóstico** no menu para verificar o status.")
+            st.stop()
+
+        resumo = pipeline.get_resumo_geral()
+        usuarios = load_usuarios_clustered()
+        economia = load_economia_projetada()
+
+        if usuarios.empty:
+            st.error("Dados de usuários não disponíveis.")
+            st.stop()
+
+    except Exception as e:
+        st.error(f"Erro ao carregar dados: {e}")
+        st.info("👉 Acesse a página **Diagnóstico** para verificar o status dos arquivos.")
+        st.stop()
 
 # Métricas principais
 st.subheader("📈 Métricas Gerais")
@@ -181,31 +195,43 @@ for cluster in range(4):
 
 st.markdown("---")
 
-# Impacto projetado
+# Impacto projetado (valores dinamicos)
 st.subheader("🎯 Impacto Projetado")
+
+# Calcular valores dinamicos
+economia_mensal = resumo['economia_mensal_total']
+economia_anual = resumo['economia_anual_total']
+pct_beneficiados = resumo['pct_usuarios_risco']  # Usuarios em risco sao os beneficiados
+
+# Formatar valores
+economia_mensal_str = f"R$ {economia_mensal:,.0f}".replace(',', '.')
+if economia_anual >= 1_000_000:
+    economia_anual_str = f"R$ {economia_anual/1_000_000:.2f}M".replace('.', ',')
+else:
+    economia_anual_str = f"R$ {economia_anual:,.0f}".replace(',', '.')
 
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    st.markdown("""
+    st.markdown(f"""
     <div style="background: #2ED57322; padding: 1.5rem; border-radius: 0.5rem; text-align: center;">
-        <h2 style="margin: 0; color: #2ED573;">R$ 144.912</h2>
+        <h2 style="margin: 0; color: #2ED573;">{economia_mensal_str}</h2>
         <p style="margin: 0.5rem 0 0 0;">Economia Mensal</p>
     </div>
     """, unsafe_allow_html=True)
 
 with col2:
-    st.markdown("""
+    st.markdown(f"""
     <div style="background: #2ED57322; padding: 1.5rem; border-radius: 0.5rem; text-align: center;">
-        <h2 style="margin: 0; color: #2ED573;">R$ 1,74M</h2>
+        <h2 style="margin: 0; color: #2ED573;">{economia_anual_str}</h2>
         <p style="margin: 0.5rem 0 0 0;">Economia Anual</p>
     </div>
     """, unsafe_allow_html=True)
 
 with col3:
-    st.markdown("""
+    st.markdown(f"""
     <div style="background: #2ED57322; padding: 1.5rem; border-radius: 0.5rem; text-align: center;">
-        <h2 style="margin: 0; color: #2ED573;">77.2%</h2>
+        <h2 style="margin: 0; color: #2ED573;">{pct_beneficiados}%</h2>
         <p style="margin: 0.5rem 0 0 0;">Usuários Beneficiados</p>
     </div>
     """, unsafe_allow_html=True)

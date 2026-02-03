@@ -54,11 +54,11 @@ PRIORITY_COLORS = {
     "BAIXA": "#2ED573"
 }
 
-# Metricas gerais do projeto
+# Metricas gerais do projeto (v1.1 - Day 17 refinement)
 TOTAL_USUARIOS = 500
-ECONOMIA_MENSAL_PROJETADA = 144912.93
-ECONOMIA_ANUAL_PROJETADA = 1738955.16
-PCT_USUARIOS_RISCO = 77.2
+ECONOMIA_MENSAL_PROJETADA = 188746  # Atualizado com regras v1.1
+ECONOMIA_ANUAL_PROJETADA = 2264948  # R$ 188,746 * 12
+PCT_USUARIOS_RISCO = 85.2  # Clusters 0, 1, 2
 
 # Configuracoes do Streamlit
 PAGE_CONFIG = {
@@ -67,3 +67,8 @@ PAGE_CONFIG = {
     "layout": "wide",
     "initial_sidebar_state": "expanded"
 }
+
+# Versao do sistema
+VERSION = "1.1.0"
+VERSION_DATE = "2026-02-03"
+VERSION_NOTES = "Day 18: Error handling and optimization"

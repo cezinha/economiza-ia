@@ -21,14 +21,29 @@ st.markdown("Análise detalhada e recomendações personalizadas")
 
 st.markdown("---")
 
-# Carregar dados
-try:
-    pipeline = get_pipeline()
-    usuarios = load_usuarios_clustered()
-    user_list = get_user_list()
-except Exception as e:
-    st.error(f"Erro ao carregar dados: {e}")
-    st.stop()
+# Carregar dados com feedback visual
+with st.spinner("Carregando dados..."):
+    try:
+        pipeline = get_pipeline()
+
+        # Verificar se pipeline esta pronto
+        if not pipeline.is_ready:
+            st.error(f"Erro ao inicializar pipeline: {pipeline.init_error}")
+            st.info("Verifique a página de Diagnóstico para mais detalhes.")
+            st.stop()
+
+        usuarios = load_usuarios_clustered()
+        user_list = get_user_list()
+
+        if not user_list:
+            st.error("Nenhum usuário encontrado no sistema.")
+            st.info("Execute os notebooks de processamento para gerar os dados.")
+            st.stop()
+
+    except Exception as e:
+        st.error(f"Erro ao carregar dados: {e}")
+        st.info("Verifique a página de Diagnóstico para verificar o status dos arquivos.")
+        st.stop()
 
 # Seleção de usuário
 col1, col2 = st.columns([3, 1])
@@ -53,7 +68,16 @@ if selected_user and analyze_btn:
         resultado = pipeline.analisar_usuario(selected_user)
 
     if 'erro' in resultado:
-        st.error(resultado['erro'])
+        erro_tipo = resultado.get('erro_tipo', 'unknown')
+        st.error(f"❌ {resultado['erro']}")
+
+        if erro_tipo == 'not_found':
+            st.info("💡 Verifique se o ID do usuário está correto ou selecione outro usuário.")
+        elif erro_tipo == 'data_error':
+            st.info("💡 Verifique a página de Diagnóstico para verificar o status dos dados.")
+        elif erro_tipo == 'init_error':
+            st.info("💡 O sistema precisa ser reinicializado. Verifique os arquivos de dados.")
+
         st.stop()
 
     # Perfil do usuário
