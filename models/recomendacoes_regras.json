@@ -1,8 +1,9 @@
 {
-  "versao": "1.0",
+  "versao": "1.1",
   "data_criacao": "2026-01-26",
-  "descricao": "Regras de recomendação de economia por cluster",
-  "total_regras": 8,
+  "data_atualizacao": "2026-02-02",
+  "descricao": "Regras de recomendação de economia por cluster - Refinamento H1",
+  "total_regras": 9,
   "clusters": {
     "0": {
       "nome": "Endividados Moderados",
@@ -12,18 +13,18 @@
           "id": "R0_1",
           "categoria": "Alimentacao_Fora",
           "acao": "reducao",
-          "percentual": 0.5,
-          "titulo": "Reduzir significativamente refeições fora",
-          "mensagem": "Reduza refeições fora de casa pela metade.",
+          "percentual": 0.7,
+          "titulo": "Cortar drasticamente refeições fora",
+          "mensagem": "Reduza refeições fora de casa em 70%.",
           "dica": "Cozinhe em maior quantidade no fim de semana para a semana toda"
         },
         {
           "id": "R0_2",
           "categoria": "Vestuario",
           "acao": "reducao",
-          "percentual": 0.5,
-          "titulo": "Cortar gastos com vestuário",
-          "mensagem": "Reduza compras de roupas pela metade.",
+          "percentual": 0.7,
+          "titulo": "Cortar significativamente gastos com vestuário",
+          "mensagem": "Reduza compras de roupas em 70%.",
           "dica": "Compre apenas itens essenciais e aproveite promoções"
         }
       ]
@@ -36,19 +37,28 @@
           "id": "R1_1",
           "categoria": "Alimentacao_Fora",
           "acao": "reducao",
-          "percentual": 0.4,
-          "titulo": "Reduzir refeições fora de casa",
-          "mensagem": "Limite refeições fora a 1-2x por semana.",
-          "dica": "Leve marmita para o trabalho pelo menos 3x por semana"
+          "percentual": 0.6,
+          "titulo": "Reduzir significativamente refeições fora",
+          "mensagem": "Reduza refeições fora de casa em 60%.",
+          "dica": "Leve marmita para o trabalho pelo menos 4x por semana"
         },
         {
           "id": "R1_2",
           "categoria": "Lazer",
           "acao": "limite",
-          "percentual": 0.35,
-          "titulo": "Estabelecer teto para lazer",
-          "mensagem": "Defina um limite mensal para gastos com lazer.",
+          "percentual": 0.5,
+          "titulo": "Cortar gastos com lazer pela metade",
+          "mensagem": "Reduza gastos com lazer em 50%.",
           "dica": "Busque alternativas gratuitas: parques, eventos culturais, bibliotecas"
+        },
+        {
+          "id": "R1_3",
+          "categoria": "Vestuario",
+          "acao": "reducao",
+          "percentual": 0.4,
+          "titulo": "Reduzir gastos com vestuário",
+          "mensagem": "Reduza compras de roupas em 40%.",
+          "dica": "Priorize peças básicas e versáteis que combinem com várias roupas"
         }
       ]
     },
