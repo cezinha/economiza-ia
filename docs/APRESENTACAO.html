@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Economiza+ MVP - Apresentação</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            padding: 60px 80px;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            page-break-after: always;
+            border-bottom: 1px solid #eee;
+        }
+        .slide:last-child {
+            page-break-after: avoid;
+        }
+        h1 {
+            color: #2ED573;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #333;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        h3 {
+            color: #666;
+            font-size: 1.3em;
+            margin: 20px 0 10px 0;
+        }
+        p {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+        li {
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background: #2ED573;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        .highlight {
+            background: #2ED57322;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .metric-box {
+            display: inline-block;
+            background: #2ED573;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            margin: 10px;
+            text-align: center;
+        }
+        .metric-box .value {
+            font-size: 2em;
+            font-weight: bold;
+        }
+        .metric-box .label {
+            font-size: 0.9em;
+        }
+        .title-slide {
+            text-align: center;
+        }
+        .title-slide h1 {
+            font-size: 3.5em;
+        }
+        .status-ok { color: #2ED573; }
+        .status-warn { color: #FFE66D; }
+        .status-fail { color: #FF4757; }
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            right: 40px;
+            font-size: 0.9em;
+            color: #999;
+        }
+        @media print {
+            .slide {
+                min-height: 100vh;
+                page-break-after: always;
+            }
+            body {
+                background: white;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Slide 1: Título -->
+<div class="slide title-slide">
+    <h1>Economiza+ MVP</h1>
+    <h2>Sistema de Análise Financeira e Recomendações Personalizadas</h2>
+    <br><br>
+    <p><strong>Curso:</strong> Data Science - XP Educação</p>
+    <p><strong>Orientador:</strong> Marcos Prochnow</p>
+    <p><strong>Data:</strong> Fevereiro 2026</p>
+</div>
+
+<!-- Slide 2: Problema -->
+<div class="slide">
+    <h1>O Problema</h1>
+    <h2>Cenário Financeiro Brasileiro</h2>
+
+    <table>
+        <tr><th>Indicador</th><th>Valor</th><th>Fonte</th></tr>
+        <tr><td>Inadimplentes</td><td><strong>80,6 milhões</strong></td><td>Serasa</td></tr>
+        <tr><td>Famílias endividadas</td><td><strong>79,5%</strong></td><td>CNC</td></tr>
+        <tr><td>Não conseguem poupar</td><td><strong>60%</strong></td><td>IBGE</td></tr>
+        <tr><td>Dívida média</td><td><strong>R$ 4.042</strong></td><td>Serasa</td></tr>
+    </table>
+
+    <div class="highlight">
+        <h3>Desafio</h3>
+        <p>Famílias das classes C e D precisam de orientação <strong>personalizada</strong> para melhorar sua saúde financeira.</p>
+    </div>
+</div>
+
+<!-- Slide 3: Solução -->
+<div class="slide">
+    <h1>A Solução: Economiza+</h1>
+    <h2>Sistema Inteligente de 4 Etapas</h2>
+
+    <ol>
+        <li><strong>Análise</strong> - Processa transações financeiras</li>
+        <li><strong>Segmentação</strong> - Identifica perfil do usuário (K-means)</li>
+        <li><strong>Recomendação</strong> - Sugere ações personalizadas</li>
+        <li><strong>Monitoramento</strong> - Detecta anomalias (Isolation Forest)</li>
+    </ol>
+
+    <div class="highlight">
+        <h3>Diferencial</h3>
+        <p>Recomendações <strong>específicas por perfil</strong>, não genéricas!</p>
+    </div>
+</div>
+
+<!-- Slide 4: Metodologia -->
+<div class="slide">
+    <h1>Metodologia</h1>
+    <h2>3 Sprints em 21 Dias</h2>
+
+    <table>
+        <tr><th>Sprint</th><th>Dias</th><th>Foco</th><th>Entregas</th></tr>
+        <tr><td>1</td><td>1-7</td><td>Segmentação</td><td>EDA, Features, Clustering</td></tr>
+        <tr><td>2</td><td>8-14</td><td>Recomendações</td><td>Regras, Anomalias, Pipeline</td></tr>
+        <tr><td>3</td><td>15-21</td><td>Dashboard</td><td>Streamlit, Documentação</td></tr>
+    </table>
+
+    <h3>Stack Tecnológica</h3>
+    <ul>
+        <li>Python 3.11+ com pandas, numpy, scikit-learn</li>
+        <li>Streamlit + Plotly para dashboard</li>
+        <li>Git para versionamento</li>
+    </ul>
+</div>
+
+<!-- Slide 5: Sprint 1 -->
+<div class="slide">
+    <h1>Sprint 1: Segmentação</h1>
+    <h2>4 Perfis Financeiros Identificados</h2>
+
+    <table>
+        <tr><th>Perfil</th><th>%</th><th>Taxa Poupança</th><th>Risco</th></tr>
+        <tr><td>Endividados Moderados</td><td>17,2%</td><td>-36,8%</td><td>ALTO</td></tr>
+        <tr><td>Em Alerta</td><td>45,6%</td><td>-24,6%</td><td>MODERADO</td></tr>
+        <tr><td><strong>Endividados Severos</strong></td><td>22,4%</td><td><strong>-79,7%</strong></td><td>CRÍTICO</td></tr>
+        <tr><td>Poupadores</td><td>14,8%</td><td>+26,0%</td><td>BAIXO</td></tr>
+    </table>
+
+    <div class="highlight">
+        <h3>Descoberta Chave</h3>
+        <p><strong>85,2%</strong> dos usuários em risco financeiro!</p>
+    </div>
+</div>
+
+<!-- Slide 6: Sprint 2 -->
+<div class="slide">
+    <h1>Sprint 2: Recomendações</h1>
+    <h2>Ações Personalizadas por Perfil</h2>
+
+    <table>
+        <tr><th>Perfil</th><th>Ação Principal</th><th>Economia/Mês</th></tr>
+        <tr><td>Moderados</td><td>Cortar Alimentação Fora 70%</td><td>R$ 496</td></tr>
+        <tr><td>Em Alerta</td><td>Reduzir Lazer 50%</td><td>R$ 299</td></tr>
+        <tr><td>Severos</td><td>Eliminar Vestuário 90%</td><td>R$ 613</td></tr>
+        <tr><td>Poupadores</td><td>Otimizar Transporte 15%</td><td>R$ 123</td></tr>
+    </table>
+
+    <div style="text-align: center; margin-top: 30px;">
+        <div class="metric-box">
+            <div class="value">R$ 188.746</div>
+            <div class="label">Economia Mensal</div>
+        </div>
+        <div class="metric-box">
+            <div class="value">R$ 2,26M</div>
+            <div class="label">Economia Anual</div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 7: Dashboard -->
+<div class="slide">
+    <h1>Sprint 3: Dashboard</h1>
+    <h2>5 Páginas Implementadas</h2>
+
+    <ol>
+        <li><strong>Início</strong> - Métricas gerais e navegação</li>
+        <li><strong>Visão Geral</strong> - Distribuição dos perfis</li>
+        <li><strong>Análise de Usuário</strong> - Recomendações individuais</li>
+        <li><strong>Comparativo</strong> - Perfis lado a lado</li>
+        <li><strong>Diagnóstico</strong> - Saúde do sistema</li>
+    </ol>
+
+    <div class="highlight">
+        <h3>Tecnologias</h3>
+        <p>Streamlit + Plotly + Cache + Error Handling robusto</p>
+    </div>
+
+    <p><strong>Comando:</strong> <code>streamlit run app/app.py</code></p>
+</div>
+
+<!-- Slide 8: Validação -->
+<div class="slide">
+    <h1>Validação das Hipóteses</h1>
+
+    <h3>H1: Recomendações geram economia (Target: 15-20%)</h3>
+    <table>
+        <tr><th>Cluster</th><th>Antes</th><th>Depois</th><th>Status</th></tr>
+        <tr><td>Moderados</td><td>10,98%</td><td><strong>15,97%</strong></td><td class="status-ok">✅</td></tr>
+        <tr><td>Em Alerta</td><td>5,19%</td><td>10,03%</td><td class="status-warn">⚠️</td></tr>
+        <tr><td>Severos</td><td>17,41%</td><td><strong>17,56%</strong></td><td class="status-ok">✅</td></tr>
+    </table>
+    <p><strong>Resultado:</strong> 2 de 3 clusters atingem o target</p>
+
+    <h3>H2: K-means identifica perfis</h3>
+    <p>Silhouette: 0,267 | PCA: 82,7% → <strong>Parcialmente validada</strong></p>
+
+    <h3>H6: Detecção de anomalias</h3>
+    <p>Precision: 47,3% → <strong>Não validada</strong> (limitação do dataset)</p>
+</div>
+
+<!-- Slide 9: Lições -->
+<div class="slide">
+    <h1>Lições Aprendidas</h1>
+
+    <h3>Técnicas</h3>
+    <ul>
+        <li><strong>Interpretabilidade > Métricas</strong> - Clusters úteis mesmo com scores baixos</li>
+        <li><strong>Simplicidade funciona</strong> - 5 features foram suficientes</li>
+        <li><strong>Taxa de poupança é chave</strong> - Feature mais discriminante</li>
+    </ul>
+
+    <h3>Processo</h3>
+    <ul>
+        <li><strong>Documentação contínua</strong> economiza tempo</li>
+        <li><strong>Pipeline modular</strong> facilita iteração</li>
+        <li><strong>Ground truth importa</strong> - H6 falhou por dados sintéticos</li>
+    </ul>
+
+    <h3>Negócio</h3>
+    <ul>
+        <li>Perfis diferentes requerem abordagens diferentes</li>
+        <li>Regras agressivas funcionam para casos críticos</li>
+    </ul>
+</div>
+
+<!-- Slide 10: Próximos Passos -->
+<div class="slide">
+    <h1>Próximos Passos</h1>
+
+    <h3>Curto Prazo</h3>
+    <ul>
+        <li>Validação com usuários reais</li>
+        <li>Deploy em cloud (Streamlit Community)</li>
+        <li>Coleta de feedback</li>
+    </ul>
+
+    <h3>Médio Prazo</h3>
+    <ul>
+        <li>Integração com dados bancários reais</li>
+        <li>App mobile</li>
+        <li>Notificações push</li>
+    </ul>
+
+    <h3>Longo Prazo</h3>
+    <ul>
+        <li>Modelo preditivo de inadimplência</li>
+        <li>Gamificação de metas</li>
+        <li>Parcerias com instituições financeiras</li>
+    </ul>
+</div>
+
+<!-- Slide 11: Métricas -->
+<div class="slide">
+    <h1>Métricas Finais</h1>
+
+    <table>
+        <tr><th>Métrica</th><th>Valor</th></tr>
+        <tr><td>Usuários analisados</td><td><strong>500</strong></td></tr>
+        <tr><td>Transações processadas</td><td><strong>191.231</strong></td></tr>
+        <tr><td>Perfis identificados</td><td><strong>4</strong></td></tr>
+        <tr><td>Notebooks desenvolvidos</td><td><strong>13</strong></td></tr>
+        <tr><td>Páginas do dashboard</td><td><strong>5</strong></td></tr>
+        <tr><td>Economia mensal projetada</td><td><strong>R$ 188.746</strong></td></tr>
+        <tr><td>Economia anual projetada</td><td><strong>R$ 2,26M</strong></td></tr>
+    </table>
+</div>
+
+<!-- Slide 12: Obrigado -->
+<div class="slide title-slide">
+    <h1>Obrigado!</h1>
+    <br>
+    <h2>Economiza+ MVP v1.1.0</h2>
+    <br><br>
+    <p><strong>Dashboard:</strong> <code>streamlit run app/app.py</code></p>
+    <p><strong>Documentação:</strong> <code>CLAUDE.md</code></p>
+    <br><br>
+    <p style="color: #999;">Data Science - XP Educação</p>
+    <p style="color: #999;">Fevereiro 2026</p>
+</div>
+
+</body>
+</html>

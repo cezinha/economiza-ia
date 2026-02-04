@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Economiza+ MVP - Apresentação Final</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.5;
+        }
+        .slide {
+            width: 100%;
+            max-width: 1200px;
+            min-height: 680px;
+            margin: 20px auto;
+            padding: 35px 50px;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            page-break-after: always;
+            position: relative;
+        }
+        .slide-title {
+            background: linear-gradient(135deg, #1a5f2a 0%, #2d8a3e 100%);
+            color: white;
+            padding: 60px;
+            text-align: center;
+        }
+        .slide-title h1 { font-size: 3em; margin-bottom: 15px; }
+        .slide-title h2 { font-size: 1.4em; font-weight: 300; }
+        h1 {
+            color: #1a5f2a;
+            font-size: 1.9em;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #2d8a3e;
+            padding-bottom: 8px;
+        }
+        h2 { color: #2d8a3e; font-size: 1.3em; margin: 20px 0 12px 0; }
+        h3 { color: #555; font-size: 1.1em; margin: 15px 0 8px 0; }
+        p { margin-bottom: 12px; font-size: 1em; }
+        ul, ol { margin-left: 25px; margin-bottom: 15px; }
+        li { margin-bottom: 6px; font-size: 0.95em; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.9em; }
+        th { background: #1a5f2a; color: white; padding: 10px 12px; text-align: left; }
+        td { padding: 10px 12px; border-bottom: 1px solid #ddd; }
+        tr:nth-child(even) { background: #f9f9f9; }
+        .highlight-box {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-left: 4px solid #2d8a3e;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95em;
+        }
+        .metric-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0; }
+        .metric-card {
+            background: linear-gradient(135deg, #1a5f2a 0%, #2d8a3e 100%);
+            color: white;
+            padding: 18px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .metric-card .value { font-size: 2em; font-weight: bold; display: block; }
+        .metric-card .label { font-size: 0.85em; opacity: 0.9; }
+        .two-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .three-columns { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+        .sprint-box {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            border-top: 4px solid #2d8a3e;
+        }
+        .sprint-box h3 { color: #1a5f2a; margin-top: 0; }
+        .status-ok { color: #2d8a3e; font-weight: bold; }
+        .status-partial { color: #f57c00; font-weight: bold; }
+        .status-fail { color: #d32f2f; font-weight: bold; }
+        .footer {
+            position: absolute;
+            bottom: 15px;
+            left: 50px;
+            right: 50px;
+            text-align: center;
+            color: #999;
+            font-size: 0.8em;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+        @media print {
+            .slide { box-shadow: none; margin: 0; page-break-after: always; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- SLIDE 0: CAPA -->
+<div class="slide slide-title">
+    <h1>Economiza+ MVP</h1>
+    <h2>Sistema de Análise Financeira e Recomendações Personalizadas</h2>
+    <p style="margin-top: 40px; font-size: 1.1em;">TCC - Pós-graduação em Data Science</p>
+    <p style="font-size: 0.95em;">XP Educação | Fevereiro 2026</p>
+    <div style="margin-top: 50px;">
+        <p>Celina Uemura</p>
+        <p style="font-size: 0.9em; opacity: 0.9;">Orientador: Marcos Prochnow</p>
+    </div>
+</div>
+
+<!-- SLIDE 1: APRESENTAÇÃO -->
+<div class="slide">
+    <h1>1. Apresentação</h1>
+
+    <h2>Celina Uemura</h2>
+
+    <div class="two-columns">
+        <div>
+            <h3>Formação Acadêmica</h3>
+            <ul>
+                <li>Desenho Industrial - Programação Visual (Mackenzie)</li>
+                <li>MBA Engenharia de Software (FIAP)</li>
+                <li>Data Science (XP Educação) - em andamento</li>
+            </ul>
+
+            <h3>Experiência</h3>
+            <ul>
+                <li><strong>+25 anos</strong> em desenvolvimento web/mobile</li>
+                <li><strong>Staff Software Engineer</strong> na McKinsey & Company</li>
+                <li>Consultora acelerando processos de desenvolvimento</li>
+            </ul>
+        </div>
+        <div>
+            <h3>Especialidades</h3>
+            <div class="highlight-box">
+                <p><strong>Frontend:</strong> React, React Native, Angular, TypeScript</p>
+                <p><strong>Backend:</strong> NodeJS, SQL, NoSQL</p>
+                <p><strong>Atual:</strong> IA Generativa e integração com LLMs</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">Economiza+ MVP | TCC Data Science | XP Educação</div>
+</div>
+
+<!-- SLIDE 2: DESAFIO -->
+<div class="slide">
+    <h1>2. Desafio</h1>
+
+    <h2>O Problema</h2>
+    <div class="metric-grid">
+        <div class="metric-card">
+            <span class="value">78%</span>
+            <span class="label">famílias endividadas</span>
+        </div>
+        <div class="metric-card">
+            <span class="value">C e D</span>
+            <span class="label">classes mais afetadas</span>
+        </div>
+        <div class="metric-card">
+            <span class="value">0</span>
+            <span class="label">ferramentas personalizadas</span>
+        </div>
+    </div>
+
+    <div class="two-columns">
+        <div>
+            <h2>Hipóteses</h2>
+            <table>
+                <tr><th>#</th><th>Hipótese</th></tr>
+                <tr><td>H1</td><td>Recomendações personalizadas geram 15-20% de economia</td></tr>
+                <tr><td>H2</td><td>K-means identifica perfis distintos</td></tr>
+                <tr><td>H6</td><td>Isolation Forest detecta anomalias</td></tr>
+            </table>
+        </div>
+        <div>
+            <h2>Justificativa</h2>
+            <div class="highlight-box">
+                <ul>
+                    <li>Solução baseada em dados, não em "achismo"</li>
+                    <li>Personalização é chave para resultados</li>
+                    <li>Oportunidade de impacto social com ML</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">Economiza+ MVP | TCC Data Science | XP Educação</div>
+</div>
+
+<!-- SLIDE 3: SOLUÇÃO -->
+<div class="slide">
+    <h1>3. Solução</h1>
+
+    <div class="two-columns">
+        <div>
+            <h2>Economiza+ MVP</h2>
+            <p><strong>Proposta:</strong> Sistema que segmenta usuários em perfis comportamentais e oferece recomendações personalizadas de economia.</p>
+
+            <h3>Como funciona?</h3>
+            <ol>
+                <li>Analisa transações financeiras</li>
+                <li>Identifica padrão de gastos</li>
+                <li>Classifica em 1 de 4 perfis</li>
+                <li>Gera recomendações específicas</li>
+                <li>Projeta economia potencial</li>
+            </ol>
+        </div>
+        <div>
+            <h2>Objetivo SMART</h2>
+            <table>
+                <tr><td><strong>S</strong></td><td>Sistema de recomendações personalizadas</td></tr>
+                <tr><td><strong>M</strong></td><td>Economia de 15-20% para usuários em risco</td></tr>
+                <tr><td><strong>A</strong></td><td>K-means + regras baseadas em dados</td></tr>
+                <tr><td><strong>R</strong></td><td>Impacto em famílias classes C/D</td></tr>
+                <tr><td><strong>T</strong></td><td>21 dias (3 sprints)</td></tr>
+            </table>
+
+            <div class="highlight-box" style="margin-top: 20px;">
+                <strong>Estágio:</strong> MVP funcional | 500 usuários | 4 perfis | R$ 188K/mês projetados
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">Economiza+ MVP | TCC Data Science | XP Educação</div>
+</div>
+
+<!-- SLIDE 4: DIFERENCIAL -->
+<div class="slide">
+    <h1>4. Diferencial</h1>
+
+    <h2>O que torna o Economiza+ especial?</h2>
+
+    <div class="three-columns">
+        <div class="sprint-box">
+            <h3>Segmentação por ML</h3>
+            <p>4 perfis identificados automaticamente, não por regras arbitrárias</p>
+        </div>
+        <div class="sprint-box">
+            <h3>Personalização Real</h3>
+            <p>Recomendações específicas por perfil, não genéricas</p>
+        </div>
+        <div class="sprint-box">
+            <h3>Dados Brasileiros</h3>
+            <p>Baseado em estatísticas do Serasa, IBGE, POF e CNC</p>
+        </div>
+        <div class="sprint-box">
+            <h3>Foco em C/D</h3>
+            <p>Público ignorado por soluções tradicionais de mercado</p>
+        </div>
+        <div class="sprint-box">
+            <h3>Economia Quantificada</h3>
+            <p>Valores exatos da economia potencial, não promessas vagas</p>
+        </div>
+        <div class="sprint-box">
+            <h3>Detecção de Anomalias</h3>
+            <p>Identifica gastos atípicos que podem indicar problemas</p>
+        </div>
+    </div>
+
+    <div class="highlight-box" style="margin-top: 20px;">
+        <strong>Stack:</strong> Python | Pandas | Scikit-learn (K-means, Isolation Forest) | Streamlit | Plotly
+    </div>
+
+    <div class="footer">Economiza+ MVP | TCC Data Science | XP Educação</div>
+</div>
+
+<!-- SLIDE 5: DESENVOLVIMENTO (3 SPRINTS) -->
+<div class="slide">
+    <h1>5. Desenvolvimento</h1>
+
+    <div class="three-columns">
+        <div class="sprint-box">
+            <h3>Sprint 1: Segmentação</h3>
+            <p style="color: #666; font-size: 0.85em;">Dias 1-7</p>
+            <ul>
+                <li>EDA: 500 usuários, 191K transações</li>
+                <li>Feature engineering: 5 variáveis</li>
+                <li>K-means K=4: 4 perfis</li>
+            </ul>
+            <div class="highlight-box" style="margin-top: 10px; padding: 10px;">
+                <strong>Descoberta:</strong> 85% gastam mais do que ganham
+            </div>
+        </div>
+
+        <div class="sprint-box">
+            <h3>Sprint 2: Recomendações</h3>
+            <p style="color: #666; font-size: 0.85em;">Dias 8-14</p>
+            <ul>
+                <li>9 regras de economia (2-3/perfil)</li>
+                <li>Isolation Forest para anomalias</li>
+                <li>Pipeline: ~20 usuários/seg</li>
+            </ul>
+            <div class="highlight-box" style="margin-top: 10px; padding: 10px;">
+                <strong>Top corte:</strong> Alimentação Fora (R$ 411/mês)
+            </div>
+        </div>
+
+        <div class="sprint-box">
+            <h3>Sprint 3: Dashboard</h3>
+            <p style="color: #666; font-size: 0.85em;">Dias 15-21</p>
+            <ul>
+                <li>Streamlit: 5 páginas</li>
+                <li>Refinamento H1 (v1.1)</li>
+                <li>Documentação completa</li>
+            </ul>
+            <div class="highlight-box" style="margin-top: 10px; padding: 10px;">
+                <strong>Melhoria:</strong> Economia 8.6% > 9.83%
+            </div>
+        </div>
+    </div>
+
+    <h2 style="margin-top: 25px;">4 Perfis Identificados</h2>
+    <table>
+        <tr>
+            <th>Perfil</th>
+            <th>% Usuários</th>
+            <th>Taxa Poupança</th>
+            <th>Risco</th>
+        </tr>
+        <tr><td>Endividados Severos</td><td>22.4%</td><td>-80%</td><td style="color: #d32f2f;">CRÍTICO</td></tr>
+        <tr><td>Endividados Moderados</td><td>17.2%</td><td>-37%</td><td style="color: #f57c00;">ALTO</td></tr>
+        <tr><td>Em Alerta</td><td>45.6%</td><td>-25%</td><td style="color: #ffc107;">MODERADO</td></tr>
+        <tr><td>Poupadores</td><td>14.8%</td><td>+26%</td><td style="color: #2d8a3e;">BAIXO</td></tr>
+    </table>
+
+    <div class="footer">Economiza+ MVP | TCC Data Science | XP Educação</div>
+</div>
+
+<!-- SLIDE 6: RESULTADOS -->
+<div class="slide">
+    <h1>6. Resultados</h1>
+
+    <div class="two-columns">
+        <div>
+            <h2>Validação das Hipóteses</h2>
+            <table>
+                <tr><th>Hipótese</th><th>Status</th><th>Resultado</th></tr>
+                <tr><td>H1</td><td class="status-partial">Parcial</td><td>2/3 clusters atingem 15%+</td></tr>
+                <tr><td>H2</td><td class="status-partial">Parcial</td><td>Clusters interpretáveis</td></tr>
+                <tr><td>H6</td><td class="status-fail">Não</td><td>Limitação do dataset</td></tr>
+            </table>
+
+            <h2>Lições Aprendidas</h2>
+            <ul>
+                <li>Interpretabilidade > métricas estatísticas</li>
+                <li>Simplicidade funciona (5 features)</li>
+                <li>Perfis críticos precisam regras agressivas</li>
+                <li>Alguns perfis requerem educação financeira</li>
+            </ul>
+        </div>
+        <div>
+            <h2>Métricas Finais</h2>
+            <div class="metric-grid" style="grid-template-columns: 1fr 1fr;">
+                <div class="metric-card">
+                    <span class="value">85%</span>
+                    <span class="label">usuários em risco</span>
+                </div>
+                <div class="metric-card">
+                    <span class="value">R$ 189K</span>
+                    <span class="label">economia/mês</span>
+                </div>
+                <div class="metric-card">
+                    <span class="value">R$ 2.26M</span>
+                    <span class="label">economia/ano</span>
+                </div>
+                <div class="metric-card">
+                    <span class="value">4</span>
+                    <span class="label">perfis</span>
+                </div>
+            </div>
+
+            <h2>Próximos Passos</h2>
+            <ul>
+                <li>Integração Open Finance (dados reais)</li>
+                <li>Módulo de educação financeira</li>
+                <li>Deploy em cloud</li>
+                <li>Validação com usuários reais</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer">Economiza+ MVP | TCC Data Science | XP Educação</div>
+</div>
+
+<!-- SLIDE FINAL: OBRIGADA -->
+<div class="slide slide-title" style="background: linear-gradient(135deg, #1a5f2a 0%, #2d8a3e 100%);">
+    <h1 style="font-size: 3em; margin-bottom: 30px;">Obrigada!</h1>
+
+    <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 12px; margin: 30px auto; max-width: 500px;">
+        <h2 style="font-size: 1.6em; margin-bottom: 15px;">Celina Uemura</h2>
+        <p style="font-size: 1.1em;">Staff Software Engineer | McKinsey & Company</p>
+    </div>
+
+    <p style="margin-top: 40px; font-size: 1.1em;">Economiza+ MVP</p>
+    <p style="font-size: 0.95em; opacity: 0.9;">TCC - Pós-graduação em Data Science | XP Educação</p>
+    <p style="font-size: 0.95em; opacity: 0.9;">Orientador: Marcos Prochnow | Fevereiro 2026</p>
+</div>
+
+</body>
+</html>

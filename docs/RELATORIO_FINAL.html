@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Economiza+ MVP - Relatório Final</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            background: #fff;
+        }
+        h1 {
+            color: #2ED573;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            border-bottom: 3px solid #2ED573;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #333;
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        h3 {
+            color: #555;
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        h4 {
+            color: #666;
+            font-size: 1.1em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background: #2ED573;
+            color: white;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #2ED573;
+        }
+        .header p {
+            color: #666;
+            margin: 5px 0;
+            text-align: center;
+        }
+        .highlight {
+            background: #2ED57322;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2ED573;
+        }
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .metric-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #eee;
+        }
+        .metric-box .value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2ED573;
+        }
+        .metric-box .label {
+            font-size: 0.9em;
+            color: #666;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Consolas', monospace;
+            font-size: 0.85em;
+            margin: 15px 0;
+        }
+        .status-ok { color: #2ED573; font-weight: bold; }
+        .status-warn { color: #FFB800; font-weight: bold; }
+        .status-fail { color: #FF4757; font-weight: bold; }
+        .toc {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        .toc h3 {
+            margin-top: 0;
+        }
+        .toc ol {
+            margin-bottom: 0;
+        }
+        .page-break {
+            page-break-after: always;
+        }
+        @media print {
+            body {
+                padding: 20px;
+                font-size: 11pt;
+            }
+            h1 { font-size: 24pt; }
+            h2 { font-size: 18pt; page-break-after: avoid; }
+            h3 { font-size: 14pt; page-break-after: avoid; }
+            table { font-size: 10pt; page-break-inside: avoid; }
+            .highlight { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Economiza+ MVP</h1>
+    <h2 style="border: none; margin-top: 10px; font-size: 1.5em;">Relatório Final do Projeto</h2>
+    <p><strong>Curso:</strong> Data Science - XP Educação</p>
+    <p><strong>Orientador:</strong> Marcos Prochnow</p>
+    <p><strong>Data:</strong> Fevereiro 2026</p>
+    <p><strong>Versão:</strong> 1.1.0</p>
+</div>
+
+<div class="toc">
+    <h3>Sumário</h3>
+    <ol>
+        <li>Resumo Executivo</li>
+        <li>Introdução</li>
+        <li>Objetivos</li>
+        <li>Metodologia</li>
+        <li>Resultados - Sprint 1 (Segmentação)</li>
+        <li>Resultados - Sprint 2 (Recomendações)</li>
+        <li>Resultados - Sprint 3 (Dashboard)</li>
+        <li>Validação das Hipóteses</li>
+        <li>Discussão e Limitações</li>
+        <li>Conclusão</li>
+        <li>Trabalhos Futuros</li>
+        <li>Referências</li>
+    </ol>
+</div>
+
+<h2>1. Resumo Executivo</h2>
+
+<p>O <strong>Economiza+ MVP</strong> é um sistema de análise financeira e recomendações personalizadas desenvolvido para auxiliar famílias brasileiras das classes C e D a melhorar sua saúde financeira. O projeto utiliza técnicas de machine learning para segmentar usuários em perfis financeiros distintos e gerar recomendações de economia específicas para cada perfil.</p>
+
+<div class="metric-grid">
+    <div class="metric-box">
+        <div class="value">500</div>
+        <div class="label">Usuários Analisados</div>
+    </div>
+    <div class="metric-box">
+        <div class="value">191.231</div>
+        <div class="label">Transações Processadas</div>
+    </div>
+    <div class="metric-box">
+        <div class="value">4</div>
+        <div class="label">Perfis Identificados</div>
+    </div>
+    <div class="metric-box">
+        <div class="value">85,2%</div>
+        <div class="label">Usuários em Risco</div>
+    </div>
+    <div class="metric-box">
+        <div class="value">R$ 188.746</div>
+        <div class="label">Economia Mensal</div>
+    </div>
+    <div class="metric-box">
+        <div class="value">R$ 2,26M</div>
+        <div class="label">Economia Anual</div>
+    </div>
+</div>
+
+<h3>Validação das Hipóteses</h3>
+
+<table>
+    <tr><th>Hipótese</th><th>Status</th><th>Resultado</th></tr>
+    <tr><td>H1: Economia 15-20%</td><td class="status-warn">Parcial</td><td>2 de 3 clusters atingem target</td></tr>
+    <tr><td>H2: Clustering distinto</td><td class="status-warn">Parcial</td><td>Clusters interpretáveis, métricas abaixo</td></tr>
+    <tr><td>H6: Detecção de anomalias</td><td class="status-fail">Não</td><td>Limitação do dataset sintético</td></tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>2. Introdução</h2>
+
+<h3>2.1 Contexto</h3>
+
+<p>O Brasil enfrenta uma crise financeira crônica que afeta milhões de famílias:</p>
+
+<table>
+    <tr><th>Indicador</th><th>Valor</th><th>Fonte</th></tr>
+    <tr><td>Inadimplentes</td><td><strong>80,6 milhões</strong></td><td>Serasa, 2024</td></tr>
+    <tr><td>Famílias endividadas</td><td><strong>79,5%</strong></td><td>CNC, 2024</td></tr>
+    <tr><td>Não conseguem poupar</td><td><strong>60%</strong></td><td>IBGE, 2023</td></tr>
+    <tr><td>Dívida média</td><td><strong>R$ 4.042</strong></td><td>Serasa, 2024</td></tr>
+</table>
+
+<h3>2.2 Problema</h3>
+
+<p>As soluções existentes de gestão financeira são geralmente genéricas, complexas e inacessíveis para as classes C e D.</p>
+
+<h3>2.3 Proposta</h3>
+
+<p>O Economiza+ propõe um sistema que analisa automaticamente o comportamento financeiro, segmenta usuários em perfis distintos, personaliza recomendações e monitora transações suspeitas.</p>
+
+<h2>3. Objetivos</h2>
+
+<h3>3.1 Objetivo Geral</h3>
+
+<p>Desenvolver um sistema de recomendação financeira personalizada baseado em machine learning para famílias das classes C e D.</p>
+
+<h3>3.2 Hipóteses</h3>
+
+<table>
+    <tr><th>ID</th><th>Hipótese</th><th>Target</th></tr>
+    <tr><td>H1</td><td>Recomendações personalizadas geram economia de 15-20% da renda</td><td>15-20%</td></tr>
+    <tr><td>H2</td><td>K-means identifica perfis financeiros distintos</td><td>Silhouette > 0.50</td></tr>
+    <tr><td>H6</td><td>Isolation Forest detecta transações anômalas</td><td>Precision > 0.85</td></tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>4. Metodologia</h2>
+
+<h3>4.1 Estrutura do Projeto</h3>
+
+<p>O projeto foi desenvolvido em <strong>3 sprints</strong> de 7 dias cada:</p>
+
+<table>
+    <tr><th>Sprint</th><th>Período</th><th>Foco</th><th>Entregas</th></tr>
+    <tr><td>1</td><td>Dias 1-7</td><td>Segmentação</td><td>EDA, Features, Clustering</td></tr>
+    <tr><td>2</td><td>Dias 8-14</td><td>Recomendações</td><td>Regras, Anomalias, Pipeline</td></tr>
+    <tr><td>3</td><td>Dias 15-21</td><td>Dashboard</td><td>Streamlit, Documentação</td></tr>
+</table>
+
+<h3>4.2 Features de Clustering</h3>
+
+<table>
+    <tr><th>Feature</th><th>Descrição</th><th>Média</th><th>Std</th></tr>
+    <tr><td>media_renda</td><td>Renda média mensal</td><td>R$ 3.800</td><td>R$ 2.100</td></tr>
+    <tr><td>media_gasto</td><td>Gasto médio mensal</td><td>R$ 4.200</td><td>R$ 1.900</td></tr>
+    <tr><td>taxa_poupanca</td><td>(renda - gasto) / renda</td><td>-31,6%</td><td>42%</td></tr>
+    <tr><td>pct_gastos_essenciais</td><td>% em gastos essenciais</td><td>81%</td><td>3%</td></tr>
+    <tr><td>std_gasto</td><td>Variabilidade dos gastos</td><td>R$ 1.800</td><td>R$ 800</td></tr>
+</table>
+
+<h2>5. Resultados - Sprint 1</h2>
+
+<h3>5.1 Perfis Identificados</h3>
+
+<table>
+    <tr><th>Cluster</th><th>Nome</th><th>%</th><th>Taxa Poupança</th><th>Prioridade</th></tr>
+    <tr><td>0</td><td>Endividados Moderados</td><td>17,2%</td><td>-36,8%</td><td>ALTA</td></tr>
+    <tr><td>1</td><td>Em Alerta</td><td>45,6%</td><td>-24,6%</td><td>MODERADA</td></tr>
+    <tr><td>2</td><td>Endividados Severos</td><td>22,4%</td><td><strong>-79,7%</strong></td><td>CRÍTICA</td></tr>
+    <tr><td>3</td><td>Poupadores</td><td>14,8%</td><td>+26,0%</td><td>BAIXA</td></tr>
+</table>
+
+<div class="highlight">
+    <strong>Descoberta Chave:</strong> 85,2% dos usuários estão em risco financeiro (clusters 0, 1 e 2).
+</div>
+
+<div class="page-break"></div>
+
+<h2>6. Resultados - Sprint 2</h2>
+
+<h3>6.1 Sistema de Recomendações (v1.1)</h3>
+
+<table>
+    <tr><th>Cluster</th><th>Prioridade</th><th>Regra Principal</th><th>Economia/Mês</th></tr>
+    <tr><td>0 - Moderados</td><td>ALTA</td><td>Cortar Alimentação Fora 70%</td><td>R$ 496</td></tr>
+    <tr><td>1 - Em Alerta</td><td>MODERADA</td><td>Reduzir Alimentação Fora 60%</td><td>R$ 299</td></tr>
+    <tr><td>2 - Severos</td><td>CRÍTICA</td><td>Eliminar Vestuário 90%</td><td>R$ 613</td></tr>
+    <tr><td>3 - Poupadores</td><td>BAIXA</td><td>Otimizar Transporte 15%</td><td>R$ 123</td></tr>
+</table>
+
+<h3>6.2 Impacto Projetado</h3>
+
+<div class="metric-grid">
+    <div class="metric-box">
+        <div class="value">R$ 188.746</div>
+        <div class="label">Economia Mensal (500 usuários)</div>
+    </div>
+    <div class="metric-box">
+        <div class="value">R$ 2,26M</div>
+        <div class="label">Economia Anual</div>
+    </div>
+    <div class="metric-box">
+        <div class="value">9,83%</div>
+        <div class="label">Média de Economia/Renda</div>
+    </div>
+</div>
+
+<h2>7. Resultados - Sprint 3</h2>
+
+<h3>7.1 Dashboard Streamlit</h3>
+
+<p>Dashboard interativo com 5 páginas:</p>
+
+<ol>
+    <li><strong>Início</strong> - Métricas gerais e navegação</li>
+    <li><strong>Visão Geral</strong> - Distribuição dos perfis, economia por cluster</li>
+    <li><strong>Análise de Usuário</strong> - Perfil individual, recomendações, anomalias</li>
+    <li><strong>Comparativo</strong> - Comparação entre os 4 perfis</li>
+    <li><strong>Diagnóstico</strong> - Verificação de saúde do sistema</li>
+</ol>
+
+<h3>7.2 Refinamento H1</h3>
+
+<table>
+    <tr><th>Cluster</th><th>Antes (v1.0)</th><th>Depois (v1.1)</th><th>Melhoria</th></tr>
+    <tr><td>Moderados</td><td>10,98%</td><td><strong>15,97%</strong></td><td>+4,99pp</td></tr>
+    <tr><td>Em Alerta</td><td>5,19%</td><td>10,03%</td><td>+4,84pp</td></tr>
+    <tr><td>Severos</td><td>17,41%</td><td><strong>17,56%</strong></td><td>+0,15pp</td></tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>8. Validação das Hipóteses</h2>
+
+<h3>8.1 H1: Recomendações geram economia de 15-20%</h3>
+
+<table>
+    <tr><th>Cluster</th><th>Target</th><th>Resultado</th><th>Status</th></tr>
+    <tr><td>Moderados</td><td>15-20%</td><td>15,97%</td><td class="status-ok">✓ Atingido</td></tr>
+    <tr><td>Em Alerta</td><td>15-20%</td><td>10,03%</td><td class="status-warn">⚠ Abaixo</td></tr>
+    <tr><td>Severos</td><td>15-20%</td><td>17,56%</td><td class="status-ok">✓ Atingido</td></tr>
+</table>
+
+<p><strong>Conclusão:</strong> PARCIALMENTE VALIDADA - 2 de 3 clusters atingem o target.</p>
+
+<h3>8.2 H2: K-means identifica perfis distintos</h3>
+
+<table>
+    <tr><th>Métrica</th><th>Target</th><th>Resultado</th><th>Status</th></tr>
+    <tr><td>Silhouette Score</td><td>> 0.50</td><td>0.267</td><td class="status-fail">✗ Abaixo</td></tr>
+    <tr><td>PCA Variance (2D)</td><td>> 70%</td><td>82.7%</td><td class="status-ok">✓ Acima</td></tr>
+    <tr><td>Interpretabilidade</td><td>Alta</td><td>Alta</td><td class="status-ok">✓ Atingido</td></tr>
+</table>
+
+<p><strong>Conclusão:</strong> PARCIALMENTE VALIDADA - Clusters são interpretáveis e acionáveis.</p>
+
+<h3>8.3 H6: Isolation Forest detecta anomalias</h3>
+
+<table>
+    <tr><th>Métrica</th><th>Target</th><th>Resultado</th><th>Status</th></tr>
+    <tr><td>Precision</td><td>> 0.85</td><td>47.3%</td><td class="status-fail">✗ Não atingido</td></tr>
+    <tr><td>Recall</td><td>> 0.80</td><td>47.4%</td><td class="status-fail">✗ Não atingido</td></tr>
+</table>
+
+<p><strong>Conclusão:</strong> NÃO VALIDADA - Anomalias geradas aleatoriamente no dataset sintético.</p>
+
+<div class="page-break"></div>
+
+<h2>9. Discussão e Limitações</h2>
+
+<h3>9.1 Pontos Fortes</h3>
+<ul>
+    <li>Abordagem personalizada por perfil</li>
+    <li>Clusters interpretáveis para usuários finais</li>
+    <li>Pipeline escalável (~20 usuários/segundo)</li>
+    <li>Documentação completa (13 notebooks)</li>
+    <li>Interface amigável com Streamlit</li>
+</ul>
+
+<h3>9.2 Limitações</h3>
+<ul>
+    <li>Dataset sintético não captura correlações reais</li>
+    <li>Silhouette Score abaixo do ideal</li>
+    <li>Cluster 1 requer abordagem diferente (educação financeira)</li>
+    <li>Sem validação com usuários reais</li>
+</ul>
+
+<h3>9.3 Lições Aprendidas</h3>
+
+<table>
+    <tr><th>Lição</th><th>Descrição</th></tr>
+    <tr><td>Interpretabilidade > Métricas</td><td>Clusters úteis mesmo com Silhouette baixo</td></tr>
+    <tr><td>Simplicidade funciona</td><td>5 features foram suficientes</td></tr>
+    <tr><td>Documentação contínua</td><td>Economiza tempo no longo prazo</td></tr>
+    <tr><td>Ground truth importa</td><td>H6 falhou por dados inadequados</td></tr>
+</table>
+
+<h2>10. Conclusão</h2>
+
+<p>O projeto <strong>Economiza+ MVP</strong> atingiu seus principais objetivos, demonstrando a viabilidade de um sistema de recomendação financeira personalizada para as classes C e D. A economia projetada de <strong>R$ 2,26 milhões/ano</strong> para 500 usuários indica potencial significativo de impacto social.</p>
+
+<h2>11. Trabalhos Futuros</h2>
+
+<ul>
+    <li><strong>Curto prazo:</strong> Validação com usuários reais, deploy em cloud</li>
+    <li><strong>Médio prazo:</strong> Integração com Open Banking, app mobile</li>
+    <li><strong>Longo prazo:</strong> Modelo preditivo de inadimplência, parcerias</li>
+</ul>
+
+<h2>12. Referências</h2>
+
+<ol>
+    <li>Serasa Experian. Mapa da Inadimplência no Brasil. 2024.</li>
+    <li>CNC. Pesquisa de Endividamento e Inadimplência do Consumidor. 2024.</li>
+    <li>IBGE. Pesquisa de Orçamentos Familiares. 2023.</li>
+    <li>MacQueen, J. Some methods for classification and analysis of multivariate observations. 1967.</li>
+    <li>Liu, F.T., Ting, K.M., Zhou, Z.H. Isolation Forest. 2008.</li>
+    <li>Pedregosa, F. et al. Scikit-learn: Machine Learning in Python. 2011.</li>
+</ol>
+
+<hr>
+
+<p style="text-align: center; color: #999; margin-top: 40px;">
+    <strong>Economiza+ MVP v1.1.0</strong><br>
+    Fevereiro 2026
+</p>
+
+</body>
+</html>

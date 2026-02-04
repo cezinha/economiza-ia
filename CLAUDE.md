@@ -65,14 +65,14 @@ The project generates synthetic financial data based on Brazilian statistics (Se
 
 - **Sprint 1** (Days 1-7): EDA, Feature Engineering, Clustering - COMPLETED
 - **Sprint 2** (Days 8-14): Recommendation system, Anomaly detection - COMPLETED
-- **Sprint 3** (Days 15-21): Dashboard (Streamlit), Integration, Documentation - IN PROGRESS (57%)
+- **Sprint 3** (Days 15-21): Dashboard (Streamlit), Integration, Documentation - IN PROGRESS (86%)
   - Day 15: Dashboard structure and pages - COMPLETED
   - Day 16: Bug fixes (cluster names), dashboard testing - COMPLETED
   - Day 17: H1 refinement (rules v1.1), economy recalculation - COMPLETED
   - Day 18: Optimization and error handling - COMPLETED
-  - Day 19: Documentation (README, presentation) - NEXT
-  - Day 20: Documentation (final report) - PENDING
-  - Day 21: Final review and delivery - PENDING
+  - Day 19: Documentation (README, presentation) - COMPLETED
+  - Day 20: Documentation (final report) - COMPLETED
+  - Day 21: Final review and delivery - NEXT
 
 ### Sprint 3 Roadmap
 
@@ -518,11 +518,21 @@ resumo = pipeline.get_resumo_geral()
 - `app/pages/1_Visao_Geral.py` - Overview page with metrics and charts
 - `app/pages/2_Analise_Usuario.py` - Individual user analysis page
 - `app/pages/3_Comparativo.py` - Cluster comparison page
+- `app/pages/4_Diagnostico.py` - System health check page (Day 18)
 - `app/components/cards.py` - Reusable card components
 - `app/components/charts.py` - Reusable chart components (Plotly)
 - `app/utils/pipeline.py` - Pipeline wrapper for Streamlit
 - `app/utils/data_loader.py` - Data loading utilities
 - `app/utils/config.py` - Configuration constants
+
+### Sprint 3 Documentation (Days 19-20)
+- `README.md` - Complete project documentation (updated)
+- `docs/APRESENTACAO.md` - Presentation in Markdown format
+- `docs/APRESENTACAO_SLIDES.md` - Marp-compatible slides
+- `docs/APRESENTACAO.html` - HTML presentation (print to PDF)
+- `docs/RELATORIO_FINAL.md` - Complete technical report (600+ lines)
+- `docs/RELATORIO_FINAL.html` - HTML report (print to PDF)
+- `docs/README.md` - PDF generation instructions
 
 ### Visualizations Generated
 
