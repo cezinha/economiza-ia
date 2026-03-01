@@ -18,16 +18,6 @@ def render_sidebar() -> Tuple[Optional[str], bool]:
         Tuple com (user_id selecionado, botao_analisar clicado)
     """
     with st.sidebar:
-        # Logo/Titulo
-        st.markdown("""
-        <div style="text-align: center; padding: 1rem 0;">
-            <h1 style="color: #2ED573; margin: 0;">💰</h1>
-            <h2 style="margin: 0;">Economiza+</h2>
-            <p style="color: #666; margin: 0;">MVP Dashboard</p>
-        </div>
-        """, unsafe_allow_html=True)
-
-        st.markdown("---")
 
         # Selecao de usuario
         st.subheader("🔍 Análise Individual")

@@ -43,6 +43,13 @@ st.markdown("""
         padding: 1rem;
         border-radius: 0.5rem;
     }
+    [data-testid="stImage"] {
+        display: flex;
+        justify-content: center;
+    }
+    [data-testid="stFullScreenFrame"] > div {
+        width: 100% !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -54,7 +61,13 @@ def main():
     selected_user, analyze_clicked = render_sidebar()
 
     # Header principal
-    st.markdown('<h1 class="main-header">💰 Economiza+ MVP</h1>', unsafe_allow_html=True)
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        logo_path = Path(__file__).parent.parent.parent / "images" / "logo.png"
+        if logo_path.exists():
+            st.image(str(logo_path), width=293)
+        else:
+            st.markdown('<h1 class="main-header">💰 Economiza+ MVP</h1>', unsafe_allow_html=True)
     st.markdown(
         '<p class="sub-header">Sistema de Análise Financeira e Recomendações Personalizadas</p>',
         unsafe_allow_html=True
